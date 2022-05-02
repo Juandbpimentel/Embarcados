@@ -1,0 +1,3 @@
+Porque a saída dos pré-processos é: "printf("The square of all parts is %d",(7 +5*7 +5));"
+com isso podemos entender que não usar parênteses cobrindo as chamadas de macro ALL_PARTS está causando esse bug na saída durante o cálculo de 7+5*7+5,
+o formato da equação deveria ser ((7+5)*(7+5))

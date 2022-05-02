@@ -1,0 +1,3 @@
+O erro ocorreu pois a macro DIE não foi passadas dentro de chaves debaixo
+do if, e como ela é um pedaço de código de duas linhas, o if só pega o primeiro
+comando digitado, o fprintf, e o exit(8) fica do lado de fora, causando esse bug que fecha o código sem executar o resto do programa

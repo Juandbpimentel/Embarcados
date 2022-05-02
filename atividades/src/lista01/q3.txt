@@ -1,0 +1,6 @@
+Pela falta de parênteses separando os dois x na macro "SQR(x) (x * x))"
+quando o preprocessador compila o código, ele fica dessa forma (counter+1*counter+1)
+isso gera um bug pois ai invés se multiplicar couter+1 por counter+1, ele
+multiplica counter por+1 e depois soma com counter e +1, resumindo, não faz o que deveria fazer
+então o certo seria definir SQR dessa forma "#define SQR(x) ((x)*(x))", assim
+corrigindo o erro da ordem de precedência da multiplicação

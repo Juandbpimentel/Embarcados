@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/juanpimentel/Dropbox/Estudos/Faculdade/2022.1/Embarcados/aula02'
+./bin/app.out
+make: Leaving directory '/home/juanpimentel/Dropbox/Estudos/Faculdade/2022.1/Embarcados/aula02'
+ 

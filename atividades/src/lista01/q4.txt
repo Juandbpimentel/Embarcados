@@ -1,0 +1,8 @@
+O exemplo não produzirá a saída experada pois quando a macro é chamada
+a variavel counter vai receber a alteração de soma de mais um duas vezes
+desta forma a macro "SQR(x) ((x)*(x))" vai virar ((++counter)*(++counter))
+isso vai fazer com que counter tenha incrementado a si +1 duas vezes, causando
+a saída inesperada
+
+E por conta desse bug o contador é incrementado em +2 toda a vez que o comando while
+é executado
