@@ -22,7 +22,7 @@
 /*****************************************************************************
 **                INTERNAL MACRO DEFINITIONS
 *****************************************************************************/
-#define TIME													1000000
+#define TIME													10000000
 #define TOGGLE          										(0x01u)
 
 #define CM_PER_GPIO1											0xAC
@@ -31,10 +31,14 @@
 
 #define CM_conf_gpmc_ben1      	 								0x0878
 #define CM_conf_gpmc_a5         								0x0854
+#define CM_conf_gpmc_ad14										0x0838
 
 #define GPIO_OE                 								0x134
+#define pin                                                     14
+#define dir                                                     0
 #define GPIO_CLEARDATAOUT       								0x190
 #define GPIO_SETDATAOUT         								0x194
+#define GPIO_DATAOUT 											0x13c
 
 
 unsigned int flagBlink;
@@ -44,6 +48,7 @@ unsigned int flagBlink;
 *****************************************************************************/
 static void delay();
 static void ledInit();
+static void ledInitCustom(int CM_conf,int gpioPin, int direction);
 static void ledToggle();
 
 /* 
@@ -88,9 +93,9 @@ static void delay(){
  *  Description:  
  * =====================================================================================
  */
-void ledInit( ){
+void ledInit(){
 	
-	unsigned int val_temp; 	
+	unsigned int val_temp,addr_temp; 	
 	/*-----------------------------------------------------------------------------
 	 *  configure clock GPIO in clock module
 	 *-----------------------------------------------------------------------------*/
@@ -99,19 +104,23 @@ void ledInit( ){
 	/*-----------------------------------------------------------------------------
 	 * configure mux pin in control module
 	 *-----------------------------------------------------------------------------*/
-   	HWREG(SOC_CONTROL_REGS+CM_conf_gpmc_a5) |= 7;
+   	HWREG(SOC_CONTROL_REGS+CM_conf_gpmc_ad14) |= 7;
  
 	/*-----------------------------------------------------------------------------
 	 *  set pin direction 
 	 *-----------------------------------------------------------------------------*/
 	val_temp = HWREG(SOC_GPIO_1_REGS+GPIO_OE);
-	val_temp &= ~(1<<21);
+	
+	val_temp &= ~(1<<pin);
+	val_temp |= (dir<<pin);
 	
 	HWREG(SOC_GPIO_1_REGS+GPIO_OE) = val_temp;
 		
 }/* -----  end of function ledInit  ----- */
 
+void ledInitCustomGpio1(int CM_conf,int gpioPin, int direction){
 
+}
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -124,9 +133,9 @@ void ledToggle( ){
 		flagBlink ^= TOGGLE;
 
 		if(flagBlink)
-			HWREG(SOC_GPIO_1_REGS+GPIO_SETDATAOUT) = (1<<21);
+			HWREG(SOC_GPIO_1_REGS+GPIO_SETDATAOUT) = (1<<pin);
 		else
-			HWREG(SOC_GPIO_1_REGS+GPIO_CLEARDATAOUT) = (1<<21);
+			HWREG(SOC_GPIO_1_REGS+GPIO_CLEARDATAOUT) = (1<<pin);
 
 }/* -----  end of function ledToggle  ----- */
 
