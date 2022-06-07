@@ -22,28 +22,32 @@
 /*****************************************************************************
 **                INTERNAL MACRO DEFINITIONS
 *****************************************************************************/
-#define TIME 5000000
-#define TOGGLE (0x01u)
+#define TIME 1000000
+#define TOGGLEINT (0x01u)
+#define TOGGLESEQ (0x01u)
+#define TOGGLEALL (0x01u)
 
 #define CM_PER_GPIO1 0xAC
 #define CM_PER_GPIO1_CLKCTRL_MODULEMODE_ENABLE (0x2u)
 #define CM_PER_GPIO1_CLKCTRL_OPTFCLKEN_GPIO_1_GDBCLK (0x00040000u)
 
-#define CM_conf_gpmc_ben1 0x0878
-#define CM_conf_gpmc_a5 0x0854
 #define CM_conf_gpmc_ad14 0x0838
+#define CM_conf_gpmc_ad15 0x083C
+#define CM_conf_gpmc_a5 0x0854
 #define CM_conf_gpmc_a6 0x858
 #define CM_conf_gpmc_a7 0x85c
 #define CM_conf_gpmc_a8 0x860
-#define CM_conf_gpmc_a9 0x864
 
 #define GPIO_OE 0x134
-#define pinExtern 14
+#define OUTPUTDIR 0
+#define INPUTDIR 1
+
+#define pinAD14 14
+#define pinAD15 15
 #define pinUSR0 21
 #define pinUSR1 22
 #define pinUSR2 23
 #define pinUSR3 24
-#define dir 0
 
 #define GPIO_CLEARDATAOUT 0x190
 #define GPIO_SETDATAOUT 0x194
@@ -115,41 +119,41 @@ void ledInit()
 	/*-----------------------------------------------------------------------------
 	 * configure mux pin in control module
 	 *-----------------------------------------------------------------------------*/
-	// HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_ad14) |= 7;
-	HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_a6) |= 7;
-	HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_a7) |= 7;
-	HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_a8) |= 7;
-	HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_a9) |= 7;
+	HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_ad14) |= 7;
+	HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_ad15) |= 7;
+	// HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_a5) |= 7;
+	// HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_a6) |= 7;
+	// HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_a7) |= 7;
+	// HWREG(SOC_CONTROL_REGS + CM_conf_gpmc_a8) |= 7;
 
 	/*-----------------------------------------------------------------------------
 	 *  set pin direction
 	 *-----------------------------------------------------------------------------*/
 	val_temp = HWREG(SOC_GPIO_1_REGS + GPIO_OE);
 
-	val_temp &= ~(1 << pinExtern);
-	val_temp |= (dir << pinExtern);
+	// input pin
+	val_temp &= ~(1 << pinAD14);
+	val_temp |= (INPUTDIR << pinAD14);
+
+	// output pins
+	val_temp &= ~(1 << pinAD15);
+	val_temp |= (OUTPUTDIR << pinAD15);
 
 	val_temp &= ~(1 << pinUSR0);
-	val_temp |= (dir << pinUSR0);
+	val_temp |= (OUTPUTDIR << pinUSR0);
 
 	val_temp &= ~(1 << pinUSR1);
-	val_temp |= (dir << pinUSR1);
+	val_temp |= (OUTPUTDIR << pinUSR1);
 
 	val_temp &= ~(1 << pinUSR2);
-	val_temp |= (dir << pinUSR2);
+	val_temp |= (OUTPUTDIR << pinUSR2);
 
 	val_temp &= ~(1 << pinUSR3);
-	val_temp |= (dir << pinUSR3);
+	val_temp |= (OUTPUTDIR << pinUSR3);
 
 	HWREG(SOC_GPIO_1_REGS + GPIO_OE) = val_temp;
 
 } /* -----  end of function ledInit  ----- */
-
-/*
-void ledInitCustomGpio1(int CM_conf, int gpioPin, int direction)
-{}
-
-*/
 
 /*
  * ===  FUNCTION  ======================================================================
@@ -160,65 +164,132 @@ void ledInitCustomGpio1(int CM_conf, int gpioPin, int direction)
 
 void intercalatedBlink()
 {
-	flagBlink ^= TOGGLE;
+	flagBlink ^= TOGGLEINT;
 
 	if (flagBlink)
 	{
-		// HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinExtern);
-		// delay();
+
+		// leds on
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinAD15);
 		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR0);
 		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR2);
 		delay();
+		// leds off
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinAD15);
 		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR1);
 		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR3);
 		delay();
 	}
 	else
 	{
+		// leds on
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinAD15);
 		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR3);
 		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR1);
 		delay();
+
+		// leds off
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinAD15);
 		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR2);
 		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR0);
 		delay();
-		// delay();
+		delay();
+		opAll();
+		opAll();
+		opAll();
 		// HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinExtern);
 	}
 }
 void sequentialBlink()
 {
-	flagBlink ^= TOGGLE;
+	flagBlink ^= TOGGLESEQ;
 
 	if (flagBlink)
 	{
 		// HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinExtern);
 		// delay();
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinAD15);
 		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR0);
 		delay();
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinAD15);
 		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR1);
 		delay();
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinAD15);
 		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR2);
 		delay();
+
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinAD15);
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR3);
+		delay();
+	}
+	else
+	{
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinAD15);
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR3);
+		delay();
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinAD15);
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR2);
+		delay();
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinAD15);
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR1);
+		delay();
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinAD15);
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR0);
+		delay();
+		// HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinExtern);
+	}
+}
+
+void allBlink()
+{
+	flagBlink ^= TOGGLEALL;
+
+	if (flagBlink)
+	{
+		// HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinExtern);
+		// delay();
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinAD15);
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR0);
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR1);
+		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR2);
 		HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT) = (1 << pinUSR3);
 		delay();
 	}
 	else
 	{
 		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR3);
-		delay();
 		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR2);
-		delay();
 		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR1);
-		delay();
+		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinAD15);
 		HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinUSR0);
-		// delay();
+		delay();
 		// HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT) = (1 << pinExtern);
 	}
 }
-void ledToggle()
+
+void opAll()
+{
+	allBlink();
+	allBlink();
+}
+
+void opIntercaled()
+{
+	intercalatedBlink();
+	intercalatedBlink();
+}
+
+void opSequential()
 {
 	sequentialBlink();
 	sequentialBlink();
-	intercalatedBlink();
-	intercalatedBlink();
+}
+
+void ledToggle()
+{
+	opAll();
+	opAll();
+	opAll();
+	opSequential();
+	opIntercaled();
 } /* -----  end of function ledToggle  ----- */
