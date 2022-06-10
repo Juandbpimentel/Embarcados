@@ -145,10 +145,11 @@ void gpioPinMuxSetup(gpioMod mod, ucPinNumber pin, pinDirection dir)
 		if (dir == INPUT)
 		{
 			unsigned int temp = cmGetCtrlModule(module);
-			temp |= CONTROL_CONF_GPMC_SLEWCTRL |							 /* Slew rate slow */
-					CONTROL_CONF_GPMC_RXACTIVE |							 /* Receiver enabled */
-					(CONTROL_CONF_GPMC_PUDEN & (~CONTROL_CONF_GPMC_PUDEN)) | /* PU_PD enabled */
-					(CONTROL_CONF_GPMC_PUTYPESEL & (~CONTROL_CONF_GPMC_PUTYPESEL));
+			temp |= CONTROL_CONF_GPMC_RXACTIVE | // Receiver enabled
+					CONTROL_CONF_GPMC_SLEWCTRL;	 // Slew rate slow
+
+			temp &= ((~CONTROL_CONF_GPMC_PUDEN)) &	  // PU_PD enabled
+					((~CONTROL_CONF_GPMC_PUTYPESEL)); // PU_PD Select
 			cmSetCtrlModule(module, temp);
 		}
 	}
@@ -174,11 +175,15 @@ void gpioSetDirection(gpioMod mod, ucPinNumber pin, pinDirection dir)
 				break;
 			case GPIO1:
 				// GPIOx base + output enable offset, TRM 2.1 & 25.4.1.16
-				val_temp = HWREG(SOC_GPIO_1_REGS + GPIO_OE);
+				addr_temp = SOC_GPIO_1_REGS + GPIO_OE;
+				// not overwriting previous mod setting
+				val_temp = HWREG(addr_temp);
 				break;
 			case GPIO2:
 				// GPIOx base + output enable offset, TRM 2.1 & 25.4.1.16
-				val_temp = HWREG(SOC_GPIO_2_REGS + GPIO_OE);
+				addr_temp = SOC_GPIO_2_REGS + GPIO_OE;
+				// not overwriting previous mod setting
+				val_temp = HWREG(addr_temp);
 				break;
 			case GPIO3:
 				break;
@@ -211,11 +216,13 @@ int gpioGetDirection(gpioMod mod, ucPinNumber pin)
 		{
 		case GPIO0:
 			// GPIOx base + output enable offset, TRM 2.1 & 25.4.1.16
-			val_temp = HWREG(SOC_GPIO_0_REGS + GPIO_OE);
+			addr_temp = SOC_GPIO_0_REGS + GPIO_OE;
+			val_temp = HWREG(addr_temp);
 			break;
 		case GPIO1:
 			// GPIOx base + output enable offset, TRM 2.1 & 25.4.1.16
-			val_temp = HWREG(SOC_GPIO_1_REGS + GPIO_OE);
+			addr_temp = SOC_GPIO_1_REGS + GPIO_OE;
+			val_temp = HWREG(addr_temp);
 			break;
 		case GPIO2:
 
@@ -263,19 +270,20 @@ void gpioSetPinValue(gpioMod mod, ucPinNumber pin, pinLevel value)
 				break;
 			case GPIO1:
 				// GPIOx base + set data out offset, TRM 2.1 & 25.4.1.26
-				val_temp = HWREG(SOC_GPIO_1_REGS + GPIO_SETDATAOUT);
-				val_temp |= 1 << pin;
+				addr_temp = SOC_GPIO_1_REGS + GPIO_SETDATAOUT;
+				val_temp = 1 << pin;
 				break;
 			case GPIO2:
 				// GPIOx base + set data out offset, TRM 2.1 & 25.4.1.26
-				val_temp = HWREG(SOC_GPIO_2_REGS + GPIO_SETDATAOUT);
-				val_temp |= 1 << pin;
+				addr_temp = SOC_GPIO_2_REGS + GPIO_SETDATAOUT;
+				val_temp = 1 << pin;
 				break;
 			case GPIO3:
 				break;
 			default:
 				break;
 			} /* -----  end switch  ----- */
+			HWREG(addr_temp) |= val_temp;
 		}
 	}
 	else
@@ -287,20 +295,21 @@ void gpioSetPinValue(gpioMod mod, ucPinNumber pin, pinLevel value)
 			case GPIO0:
 				break;
 			case GPIO1:
-				// GPIOx base + set data out offset, TRM 2.1 & 25.4.1.26
-				val_temp = HWREG(SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT);
-				val_temp |= 1 << pin;
+				// GPIOx base+clear data out offset, TRM 2.1 & 25.4.1.25
+				addr_temp = SOC_GPIO_1_REGS + GPIO_CLEARDATAOUT;
+				val_temp = 1 << pin;
 				break;
 			case GPIO2:
-				// GPIOx base + set data out offset, TRM 2.1 & 25.4.1.26
-				val_temp = HWREG(SOC_GPIO_2_REGS + GPIO_CLEARDATAOUT);
-				val_temp |= 1 << pin;
+				// GPIOx base+clear data out offset, TRM 2.1 & 25.4.1.25
+				addr_temp = SOC_GPIO_2_REGS + GPIO_CLEARDATAOUT;
+				val_temp = 1 << pin;
 				break;
 			case GPIO3:
 				break;
 			default:
 				break;
 			} /* -----  end switch  ----- */
+			HWREG(addr_temp) &= val_temp;
 		}
 	}
 } /* -----  end of function gpioGetPinValue  ----- */
@@ -323,10 +332,10 @@ unsigned int gpioGetPinValue(gpioMod mod, ucPinNumber pin)
 		case GPIO0:
 			break;
 		case GPIO1:
-			val_temp = HWREG(SOC_GPIO_1_REGS + GPIO_DATAIN); // GPIOx base + data in offset, TRM 2.1 & 25.4.1.17
+			addr_temp = SOC_GPIO_1_REGS + GPIO_DATAIN; // GPIOx base + data in offset, TRM 2.1 & 25.4.1.17
+			val_temp = HWREG(addr_temp);
 			break;
 		case GPIO2:
-			val_temp = HWREG(SOC_GPIO_2_REGS + GPIO_DATAIN); // GPIOx base + data in offset, TRM 2.1 & 25.4.1.17
 			break;
 		case GPIO3:
 			break;

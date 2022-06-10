@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jun  7 08:46:18 2022
+# Make data base, printed on Thu Jun  9 13:08:55 2022
 
 # Variables
 
@@ -87,7 +87,7 @@ PATH = /home/juanpimentel/.nvm/versions/node/v17.7.1/bin:/usr/local/sbin:/usr/lo
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/juan-Note:@/tmp/.ICE-unix/983,unix/juan-Note:/tmp/.ICE-unix/983
+SESSION_MANAGER = local/juan-Note:@/tmp/.ICE-unix/982,unix/juan-Note:/tmp/.ICE-unix/982
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # makefile (from 'makefile', line 4)
@@ -109,7 +109,7 @@ XDG_SESSION_DESKTOP = cinnamon
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3587
+GIO_LAUNCHED_DESKTOP_FILE_PID = 1840
 # automatic
 %F = $(notdir $%)
 # environment
@@ -125,7 +125,7 @@ QT_QPA_PLATFORMTHEME = qt5ct
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 1053
+SSH_AGENT_PID = 1055
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = X-Cinnamon
 # environment
@@ -163,7 +163,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-37c10c49-7aa3-4517-ab7b-3f123d5aa496.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b84b2de8-c878-428d-b5ee-bc37fb260a73.sock
 # environment
 XDG_SESSION_ID = c2
 # environment
@@ -231,9 +231,9 @@ LANG = C
 # makefile (from 'makefile', line 3)
 AFLAGS = -mfpu=neon
 # environment
-VSCODE_PID = 3587
+VSCODE_PID = 1840
 # variable set hash-table stats:
-# Load=111/1024=11%, Rehash=0, Collisions=9/151=6%
+# Load=111/1024=11%, Rehash=0, Collisions=9/152=6%
 
 # Pattern-specific Variable Values
 
@@ -241,7 +241,7 @@ VSCODE_PID = 3587
 
 # Directories
 
-# . (device 56, inode 5928748): 12 files, no impossibilities.
+# . (device 56, inode 5899731): 12 files, no impossibilities.
 
 # 12 files, no impossibilities in 1 directories.
 
@@ -271,15 +271,15 @@ clock_module.o: src/clock_module.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 35):
+#  recipe to execute (from 'makefile', line 38):
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)clock_module.c -o $(OBJ)clock_module.o
 
 copy:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 38):
+ 
+#  recipe to execute (from 'makefile', line 41):
 	cp $(BIN)spl.boot /tftpboot/app
 
 # Not a target:
@@ -321,7 +321,7 @@ start.o: src/start.s
 #  recipe to execute (from 'makefile', line 17):
 	$(CHAIN)-as $(AFLAGS) $(SRC)start.s -o $(OBJ)start.o
 
-app: start.o main.o gpio.o uart.o pad.o control_module.o clock_module.o
+app: start.o main.o gpio.o uart.o pad.o control_module.o clock_module.o execution_functions.o
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
@@ -329,7 +329,7 @@ app: start.o main.o gpio.o uart.o pad.o control_module.o clock_module.o
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/8=0%
 #  recipe to execute (from 'makefile', line 12):
-	$(CHAIN)-ld $(OBJ)start.o $(OBJ)main.o $(OBJ)gpio.o $(OBJ)uart.o $(OBJ)pad.o $(OBJ)control_module.o $(OBJ)clock_module.o -T $(SRC)memmap.ld -o $(OBJ)main.elf
+	$(CHAIN)-ld $(OBJ)start.o $(OBJ)main.o $(OBJ)gpio.o $(OBJ)uart.o $(OBJ)pad.o $(OBJ)control_module.o $(OBJ)clock_module.o $(OBJ)execution_functions.o -T $(SRC)memmap.ld -o $(OBJ)main.elf
 	$(CHAIN)-objcopy $(OBJ)main.elf $(BIN)spl.boot -O binary
 	cp $(BIN)spl.boot /tftpboot/app
 
@@ -337,13 +337,13 @@ dump:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 46):
+#  recipe to execute (from 'makefile', line 49):
 	$(CHAIN)-objdump -D $(OBJ)main.elf
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-02 15:00:32.447026036
+#  Last modified 2022-06-07 15:53:43.724727787
 #  File has been updated.
 #  Successfully updated.
 
@@ -353,6 +353,12 @@ src/start.s:
 #  Last modified 2022-05-23 21:51:42
 #  File has been updated.
 #  Successfully updated.
+
+# Not a target:
+src/execution_functions.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 uart.o: src/uart.c
 #  Implicit rule search has not been done.
@@ -371,7 +377,7 @@ control_module.o: src/control_module.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 32):
+#  recipe to execute (from 'makefile', line 35):
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)control_module.c -o $(OBJ)control_module.o
 
 # Not a target:
@@ -402,7 +408,7 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 41):
+#  recipe to execute (from 'makefile', line 44):
 	rm -rf $(OBJ)*.o
 	rm -rf $(OBJ)*.elf
 	rm -rf $(BIN)*.boot
@@ -427,20 +433,27 @@ pad.o: src/pad.c
 #  recipe to execute (from 'makefile', line 29):
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)pad.c -o $(OBJ)pad.o
 
+execution_functions.o: src/execution_functions.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 32):
+	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)execution_functions.c -o $(OBJ)execution_functions.o
+
 # files hash-table stats:
-# Load=22/1024=2%, Rehash=0, Collisions=0/57=0%
+# Load=24/1024=2%, Rehash=0, Collisions=3/62=5%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 35 / storage = 314 B / avg = 8 B
-# current buf: size = 8162 B / used = 314 B / count = 35 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 37 / storage = 362 B / avg = 9 B
+# current buf: size = 8162 B / used = 362 B / count = 37 / avg = 9 B
 
-# strcache performance: lookups = 61 / hit rate = 42%
+# strcache performance: lookups = 65 / hit rate = 43%
 # hash-table stats:
-# Load=35/8192=0%, Rehash=0, Collisions=1/61=2%
-# Finished Make data base on Tue Jun  7 08:46:18 2022
+# Load=37/8192=0%, Rehash=0, Collisions=1/65=2%
+# Finished Make data base on Thu Jun  9 13:08:55 2022
 
  

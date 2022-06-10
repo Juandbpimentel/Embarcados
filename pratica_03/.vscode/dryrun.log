@@ -7,7 +7,8 @@ arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ 
 arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ -c src/pad.c -o obj/pad.o
 arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ -c src/control_module.c -o obj/control_module.o
 arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ -c src/clock_module.c -o obj/clock_module.o
-arm-none-eabi-ld obj/start.o obj/main.o obj/gpio.o obj/uart.o obj/pad.o obj/control_module.o obj/clock_module.o -T src/memmap.ld -o obj/main.elf
+arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ -c src/execution_functions.c -o obj/execution_functions.o
+arm-none-eabi-ld obj/start.o obj/main.o obj/gpio.o obj/uart.o obj/pad.o obj/control_module.o obj/clock_module.o obj/execution_functions.o -T src/memmap.ld -o obj/main.elf
 arm-none-eabi-objcopy obj/main.elf bin/spl.boot -O binary
 cp bin/spl.boot /tftpboot/app
 make: Leaving directory '/home/juanpimentel/Documentos/Github/Embarcados/pratica_03'

@@ -18,17 +18,19 @@
 
 #include "gpio.h"
 #include "uart.h"
+#include "execution_functions.h"
 
 /*****************************************************************************
 **                INTERNAL MACRO DEFINITIONS
 *****************************************************************************/
-#define TIME 5000000
+#define TIME 1000000
+// pinos do módulo gpio 1
+#define pinBEN1 28 // botão 1
+#define pinAD12 12 // botão 2
+#define pinAD13 13 // led botão 1
+#define pinAD14 14 // led botão 2
 
-#define TOGGLEALL 0x1
-#define TOGGLESEQ 0x1
-#define TOGGLEINT 0x1
-
-#define pinAD14INPUT 14
+// pinos dos leds internos do gpio1
 #define pinUSR0 21
 #define pinUSR1 22
 #define pinUSR2 23
@@ -37,26 +39,12 @@
 // state machine
 typedef enum _state
 {
-	SEQ1 = 1,
-	SEQ2 = 2,
-	SEQ3 = 3,
-	SEQ4 = 4,
-	SEQ5 = 5
+	SEQ1 = 0,
+	SEQ2 = 1,
+	SEQ3 = 2,
+	SEQ4 = 3,
+	SEQ5 = 4
 } state;
-
-/*****************************************************************************
-**                INTERNAL FUNCTION PROTOTYPES
-*****************************************************************************/
-static void delay(int);
-void ledON(gpioMod, ucPinNumber);
-void ledOFF(gpioMod, ucPinNumber);
-
-void intercalatedBlink();
-void sequentialBlink();
-void allBlink();
-void opAll();
-void opIntercaled();
-void opSequential();
 
 /*
  *
@@ -64,119 +52,19 @@ void opSequential();
  *
  */
 
-void intercalatedBlink()
-{
-
-	// leds on
-	////ledON(GPIO1, pinAD15);
-	ledON(GPIO1, pinUSR0);
-	ledON(GPIO1, pinUSR2);
-	delay(TIME);
-	////ledOFF(GPIO1, pinAD15);
-	ledON(GPIO1, pinUSR1);
-	ledON(GPIO1, pinUSR3);
-	delay(TIME);
-
-	// leds off
-	////ledOFF(GPIO1, pinAD15);
-	ledOFF(GPIO1, pinUSR3);
-	ledOFF(GPIO1, pinUSR1);
-	delay(TIME);
-	////ledOFF(GPIO1, pinAD15);
-	ledOFF(GPIO1, pinUSR2);
-	ledOFF(GPIO1, pinUSR0);
-	delay(TIME);
-	// led(GPIO1,pinExtern);
-}
-void sequentialBlink()
-{
-	// leds on
-	// ledON(GPIO1, pinAD15);
-	ledON(GPIO1, pinUSR0);
-	delay(TIME);
-
-	// ledOFF(GPIO1, pinAD15);
-	ledON(GPIO1, pinUSR1);
-	delay(TIME);
-
-	// ledON(GPIO1, pinAD15);
-	ledON(GPIO1, pinUSR2);
-	delay(TIME);
-
-	// ledOFF(GPIO1, pinAD15);
-	ledON(GPIO1, pinUSR3);
-	delay(TIME);
-
-	// leds off
-	// ledON(GPIO1, pinAD15);
-	ledOFF(GPIO1, pinUSR3);
-	delay(TIME);
-
-	// ledOFF(GPIO1, pinAD15);
-	ledOFF(GPIO1, pinUSR2);
-	delay(TIME);
-
-	// ledON(GPIO1, pinAD15);
-	ledOFF(GPIO1, pinUSR1);
-	delay(TIME);
-
-	// ledOFF(GPIO1, pinAD15);
-	ledOFF(GPIO1, pinUSR0);
-	delay(TIME);
-	// led(GPIO1,pinExtern);
-}
-void allBlink()
-{
-	// led(GPIO1,pinExtern);
-	// delay();
-	// ledON(GPIO1, pinAD15);
-	ledON(GPIO1, pinUSR0);
-	ledON(GPIO1, pinUSR1);
-	ledON(GPIO1, pinUSR2);
-	ledON(GPIO1, pinUSR3);
-	delay(TIME);
-
-	ledOFF(GPIO1, pinUSR3);
-	ledOFF(GPIO1, pinUSR2);
-	ledOFF(GPIO1, pinUSR1);
-	ledOFF(GPIO1, pinUSR0);
-	// ledOFF(GPIO1, pinAD15);
-	delay(TIME);
-	// led(GPIO1,pinExtern);
-}
-
-void opAll()
-{
-	allBlink();
-	allBlink();
-}
-
-void opIntercaled()
-{
-	intercalatedBlink();
-	intercalatedBlink();
-}
-
-void opSequential()
-{
-	sequentialBlink();
-	sequentialBlink();
-}
-
 /*
  * ===  FUNCTION  ======================================================================
  *         Name:  main
  *  Description:
  * =====================================================================================
  */
+
 int main(void)
 {
-	unsigned int op = 1;
-	ucPinNumber pinIntern0 = pinUSR0,
-				pinIntern1 = pinUSR1,
-				pinIntern2 = pinUSR2,
-				pinIntern3 = pinUSR3,
-				pinInputAd14 = pinAD14INPUT;
+	unsigned int opTwoButtons = 0;
+	// unsigned int op = SEQ1;
+	ucPinNumber pins[] = {pinUSR0, pinUSR1, pinUSR2, pinUSR3};
+	ucPinNumber button1 = pinBEN1, button2 = pinAD12; //, pinLedButton1 = pinAD11, pinLedButton2 = pinAD12;
 
 	/*-----------------------------------------------------------------------------
 	 *  initialize GPIO and UART modules
@@ -188,53 +76,86 @@ int main(void)
 	/*-----------------------------------------------------------------------------
 	 *  initialize pin of mudule
 	 *-----------------------------------------------------------------------------*/
-	gpioPinMuxSetup(GPIO1, pinIntern0, OUTPUT);
-	gpioPinMuxSetup(GPIO1, pinIntern1, OUTPUT);
-	gpioPinMuxSetup(GPIO1, pinIntern2, OUTPUT);
-	gpioPinMuxSetup(GPIO1, pinIntern3, OUTPUT);
+	for (int i = 0; i < 4; i++)
+	{
+		gpioPinMuxSetup(GPIO1, pins[i], OUTPUT);
+	}
+	gpioPinMuxSetup(GPIO1, button1, INPUT);
+	gpioPinMuxSetup(GPIO1, button2, INPUT);
 	delay(1000);
-
-	gpioPinMuxSetup(GPIO1, pinInputAd14, INPUT);
 
 	/*-----------------------------------------------------------------------------
 	 *  set pin direction
 	 *-----------------------------------------------------------------------------*/
 
-	gpioSetDirection(GPIO1, pinIntern0, OUTPUT);
-	gpioSetDirection(GPIO1, pinIntern1, OUTPUT);
-	gpioSetDirection(GPIO1, pinIntern2, OUTPUT);
-	gpioSetDirection(GPIO1, pinIntern3, OUTPUT);
+	for (int i = 0; i < 4; i++)
+	{
+		gpioSetDirection(GPIO1, pins[i], OUTPUT);
+	}
+	gpioSetDirection(GPIO1, button1, INPUT);
+	gpioSetDirection(GPIO1, button2, INPUT);
 	delay(1000);
-
-	gpioSetDirection(GPIO1, pinInputAd14, INPUT);
 
 	/*-----------------------------------------------------------------------------
 	 *  set pin in LOW level
 	 *-----------------------------------------------------------------------------*/
 
-	uartPutString(UART0, "GPIO INPUT Initialized\n", 22);
+	uartPutString(UART0, "GPIO INPUT Initialized\n", 23);
 
+	allBlink(GPIO1, pins, 4, TIME);
+	allBlink(GPIO1, pins, 4, TIME);
+	delay(TIME + TIME);
+	uartPutString(UART0, "SEQ1 ", 4);
 	while (true)
 	{
-		switch (op)
+
+		if (readButton(button1))
+		{
+			if (readButton(button2))
+			{
+				opTwoButtons |= 0x3;
+				uartPutString(UART0, "SEQ4 ", 4);
+			}
+			else
+			{
+				opTwoButtons &= 0 << 0;
+				opTwoButtons |= 1 << 1;
+				uartPutString(UART0, "SEQ3 ", 4);
+			}
+		}
+		else
+		{
+			if (readButton(button2))
+			{
+				opTwoButtons &= 0 << 1;
+				opTwoButtons |= 0x1;
+				uartPutString(UART0, "SEQ2 ", 4);
+			}
+			else
+			{
+				opTwoButtons &= 0 << 1;
+				opTwoButtons &= 0 << 0;
+				uartPutString(UART0, "SEQ1 ", 4);
+			}
+		}
+
+		switch (opTwoButtons)
 		{
 		case SEQ1:
-			opIntercaled();
-			delay(1000000);
-			if (gpioGetPinValue(GPIO1, pinInputAd14))
-				op = SEQ2;
+			intercalatedBlink(GPIO1, pins, 4, TIME);
+			delay(TIME);
 			break;
 		case SEQ2:
-			opSequential();
-			delay(1000000);
-			if (gpioGetPinValue(GPIO1, pinInputAd14))
-				op = SEQ3;
+			sequentialBlink(GPIO1, pins, 4, TIME);
+			delay(TIME);
 			break;
 		case SEQ3:
-			opAll();
-			delay(1000000);
-			if (gpioGetPinValue(GPIO1, pinInputAd14))
-				op = SEQ1;
+			allBlink(GPIO1, pins, 4, TIME);
+			delay(TIME);
+			break;
+		case SEQ4:
+			farEndBlink(GPIO1, pins, 4, TIME);
+			delay(TIME);
 			break;
 		default:
 			break;
@@ -245,35 +166,24 @@ int main(void)
 } /* ----------  end of function main  ---------- */
 
 /*
- * ===  FUNCTION  ======================================================================
- *         Name:  ledON
- *  Description:
- * =====================================================================================
- */
-void ledON(gpioMod mod, ucPinNumber pin)
-{
-	gpioSetPinValue(mod, pin, HIGH);
-} /* -----  end of function ledON  ----- */
+switch (op)
+		{
+		case SEQ1:
+			uartPutString(UART0, "SEQ2", 4);
+			op = SEQ2;
+			break;
+		case SEQ2:
+			uartPutString(UART0, "SEQ3", 4);
+			op = SEQ3;
+			break;
+		case SEQ3:
+			uartPutString(UART0, "SEQ4", 4);
+			op = SEQ4;
+			break;
+		case SEQ4:
+			uartPutString(UART0, "SEQ5", 4);
+			op = SEQ5;
+			break;
+		}
 
-/*
- * ===  FUNCTION  ======================================================================
- *         Name:  ledOFF
- *  Description:
- * =====================================================================================
- */
-void ledOFF(gpioMod mod, ucPinNumber pin)
-{
-	gpioSetPinValue(mod, pin, LOW);
-} /* -----  end of function ledOFF  ----- */
-
-/*FUNCTION*-------------------------------------------------------
- *
- * Function Name : Delay
- * Comments      :
- *END*-----------------------------------------------------------*/
-static void delay(int iTime)
-{
-	volatile unsigned int ra;
-	for (ra = 0; ra < iTime; ra++)
-		;
-}
+		*/
