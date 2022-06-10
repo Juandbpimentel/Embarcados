@@ -1,6 +1,6 @@
 # Embarcados
 
-## [Pratica 01](pratica\ 01/)
+## [Pratica 01]('pratica 01'/)
 
 ## [Pratica 02](pratica_02/)
 
