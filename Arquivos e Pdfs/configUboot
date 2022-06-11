@@ -1,0 +1,26 @@
+set app "set ipaddr 10.4.2.2; set serverip 10.4.2.1;tftp 0x80000000 download.bin;echo *** Booting to BareMetal***;go 0x80000000"
+
+set app "mw 0x44e35048 0xaaaa; sleep 1; mw 0x44e35048 0x5555;set ipaddr 10.4.2.2; set serverip 10.4.2.1;tftp 0x80000000 download.bin;echo *** Booting to BareMetal ***;go 0x80000000"
+
+setenv ipaddr 10.4.1.2; setenv serverip 10.4.1.1;setenv ethact usb_ether; setenv usbnet_devaddr f8:dc:7a:00:00:02; setenv usbnet_hostaddr f8:dc:7a:00:00:01
+
+set app "mw 0x44e35048 0xaaaa; sleep 1; mw 0x44e35048 0x5555;setenv ipaddr 10.4.1.2; setenv serverip 10.4.1.1;setenv ethact usb_ether; setenv usbnet_devaddr f8:dc:7a:00:00:02; setenv usbnet_hostaddr f8:dc:7a:00:00:01;tftp 0x80000000 appGpio.bin;echo *** Booting to BareMetal ***;go 0x80000000"
+
+https://github.com/mihaiolteanu/xinu-beaglebone-howto
+
+http://www2.cs.sfu.ca/CourseCentral/433/bfraser/assignments.html
+
+md 0x44e35030 8
+
+mw 0x44e35048 0xaaaa; sleep 1; mw 0x44e35048 0x5555
+
+
+https://e2e.ti.com/support/embedded/starterware/f/790/t/302178
+https://e2e.ti.com/support/embedded/starterware/f/790/t/172022
+
+
+
+https://www.circuito.io/
+https://www.hackster.io/
+
+set app "set ipaddr 10.4.2.2; set serverip 10.4.2.1;tftp 0x80000000 download.bin;go 0x80000000"
