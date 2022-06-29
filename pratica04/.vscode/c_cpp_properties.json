@@ -2,10 +2,7 @@
     "configurations": [
         {
             "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "/home/juanpimentel/Dropbox/Estudos/Faculdade/2022.1/Embarcados/aula02/inc/**"
-            ],
+            "includePath": ["${workspaceFolder}/inc/*"],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "gnu17",

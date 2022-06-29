@@ -1,5 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 4.3
+ 
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -7,31 +8,29 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sat Jun 18 16:41:44 2022
+# Make data base, printed on Wed Jun 29 15:57:26 2022
 
 # Variables
 
-# makefile (from 'makefile', line 6)
+# makefile (from 'makefile', line 7)
 OBJ = obj/
 # environment
 GDK_BACKEND = x11
 # environment
 LC_ALL = C
-# makefile (from 'makefile', line 5)
+# makefile (from 'makefile', line 6)
 SRC = src/
 # environment
 GNOME_SHELL_SESSION_MODE = pop
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-GJS_DEBUG_OUTPUT = stderr
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d42c66aa-1f24-4c74-bb30-ea0f6ce12b6f.sock
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1115d2b9-2884-4ccd-ac7d-770c693a591c.sock
-# environment
-VSCODE_CWD = /home/juanpimentel
+VSCODE_CWD = /home/juanpimentel/Documentos/Github/Embarcados/pratica04
 # environment
 WINDOWPATH = 2
-# makefile (from 'makefile', line 4)
+# makefile (from 'makefile', line 5)
 IPATH = -Iinc/
 # default
 MAKE_COMMAND := make
@@ -44,15 +43,17 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/juanpimentel/Documentos/Github/Embarcados/pratica_03
+PWD = /home/juanpimentel/Documentos/Github/Embarcados/pratica04
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
+# makefile (from 'makefile', line 1)
+CHAINPATH = 
 # environment
 XDG_DATA_DIRS = /usr/share/pop:/usr/share/gnome:/home/juanpimentel/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/
 # environment
-OLDPWD = /home/juanpimentel
+OLDPWD = /home/juanpimentel/Documentos/Github/Embarcados/pratica04
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
@@ -69,10 +70,12 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 .LOADED := 
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# environment
+GNOME_TERMINAL_SERVICE = :1.128
 # makefile
 MAKEFLAGS = pqrR
 # makefile
-CURDIR := /home/juanpimentel/Documentos/Github/Embarcados/pratica_03
+CURDIR := /home/juanpimentel/Documentos/Github/Embarcados/pratica04
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -95,475 +98,209 @@ P9K_SSH = 0
 XDG_SESSION_DESKTOP = pop
 # makefile (from 'makefile', line 1)
 MAKEFILE_LIST := makefile
-# automatic
  
+# automatic
 @F = $(notdir $@)
- 
 # environment
- 
 ZSH = /home/juanpimentel/.oh-my-zsh
- 
-# makefile (from 'makefile', line 1)
- 
+# makefile (from 'makefile', line 2)
 CHAIN = $(CHAINPATH)arm-none-eabi
- 
 # environment
- 
 VSCODE_VERBOSE_LOGGING = true
- 
 # environment
- 
-VSCODE_PID = 10626
- 
+VSCODE_PID = 5967
 # environment
- 
 XDG_SESSION_TYPE = x11
- 
 # automatic
- 
 ?D = $(patsubst %/,%,$(dir $?))
- 
 # environment
- 
-SESSION_MANAGER = local/juan-pop-os:@/tmp/.ICE-unix/2185,unix/juan-pop-os:/tmp/.ICE-unix/2185
- 
+SESSION_MANAGER = local/juan-pop-os:@/tmp/.ICE-unix/1509,unix/juan-pop-os:/tmp/.ICE-unix/1509
 # automatic
- 
 *F = $(notdir $*)
- 
 # environment
- 
 CHROME_DESKTOP = code-url-handler.desktop
- 
 # environment
- 
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
- 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
- 
 # environment
- 
+P9K_TTY = old
+# environment
 VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_languagePackId":"195456cb6bc5e7dd989215cd334fb359.pt-br","_translationsConfigFile":"/home/juanpimentel/.config/Code/clp/195456cb6bc5e7dd989215cd334fb359.pt-br/tcf.json","_cacheRoot":"/home/juanpimentel/.config/Code/clp/195456cb6bc5e7dd989215cd334fb359.pt-br","_resolvedLanguagePackCoreLocation":"/home/juanpimentel/.config/Code/clp/195456cb6bc5e7dd989215cd334fb359.pt-br/30d9c6cd9483b2cc586687151bcbcd635f373630","_corruptedFile":"/home/juanpimentel/.config/Code/clp/195456cb6bc5e7dd989215cd334fb359.pt-br/corrupted.info","_languagePackSupport":true}
- 
 # default
- 
 MAKE_HOST := x86_64-pc-linux-gnu
  
 # environment
- 
 GNOME_DESKTOP_SESSION_ID = this-is-deprecated
- 
 # makefile
- 
 SHELL = /bin/sh
- 
 # default
- 
 MAKECMDGOALS := all
- 
 # environment
- 
 XMODIFIERS = @im=ibus
- 
 # environment
- 
-GJS_DEBUG_TOPICS = JS ERROR;JS LOG
- 
+SHLVL = 1
 # environment
- 
-SHLVL = 0
- 
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/6a722fb8_aa8b_447d_823f_f5b3e44d60fe
 # environment
- 
 MAKELEVEL := 0
- 
 # default
- 
 MAKE = $(MAKE_COMMAND)
- 
 # environment
- 
 PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/juanpimentel/lab/toolchain/gcc-arm-none-eabi-10.3-2021.10/bin
- 
 # default
- 
 MAKEFILES := 
- 
 # automatic
- 
 ^F = $(notdir $^)
- 
-# makefile (from 'makefile', line 3)
- 
+# makefile (from 'makefile', line 4)
 AFLAGS = -mfpu=neon
- 
 # environment
- 
-INVOCATION_ID = d9484d4b8f30438cb9ffbbb23fc93c7b
- 
-# environment
- 
 VSCODE_LOG_NATIVE = false
- 
 # environment
- 
 USERNAME = juanpimentel
- 
 # automatic
- 
 ?F = $(notdir $?)
- 
 # environment
- 
 GTK_IM_MODULE = ibus
- 
 # environment
- 
 XDG_CURRENT_DESKTOP = Unity
- 
 # environment
- 
-LS_COLORS = 
- 
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
 # automatic
- 
 +F = $(notdir $+)
- 
 # environment
- 
 LESS = -R
- 
 # environment
- 
 DESKTOP_SESSION = pop
- 
 # environment
- 
 ORIGINAL_XDG_CURRENT_DESKTOP = pop:GNOME
- 
 # 'override' directive
- 
 GNUMAKEFLAGS := 
- 
 # environment
- 
 LOGNAME = juanpimentel
  
-# environment
- 
-GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
- 
 # makefile
- 
 .DEFAULT_GOAL := all
- 
 # environment
- 
-SYSTEMD_EXEC_PID = 2202
- 
+SYSTEMD_EXEC_PID = 3521
 # environment
- 
 DISPLAY = :1
- 
 # environment
- 
 USER = juanpimentel
- 
 # environment
- 
 GTK_MODULES = gail:atk-bridge:appmenu-gtk-module
- 
 # default
- 
 MAKE_VERSION := 4.3
- 
 # environment
- 
-MANAGERPID = 1985
- 
-# environment
- 
-GIO_LAUNCHED_DESKTOP_FILE_PID = 10626
- 
-# environment
- 
 PAGER = less
- 
 # environment
- 
-_ = /usr/share/code/code
- 
-# makefile (from 'makefile', line 7)
- 
+_ = /usr/bin/code
+# makefile (from 'makefile', line 8)
 BIN = bin/
- 
 # environment
- 
 XDG_RUNTIME_DIR = /run/user/1000
- 
-# makefile (from 'makefile', line 2)
- 
+# makefile (from 'makefile', line 3)
 CFLAGS = -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8
- 
 # environment
- 
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
- 
 # environment
- 
-JOURNAL_STREAM = 8:38100
- 
+COLORTERM = truecolor
 # environment
- 
 XDG_SESSION_CLASS = user
- 
 # environment
- 
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
- 
 # environment
- 
 HOME = /home/juanpimentel
- 
 # environment
- 
 QT_IM_MODULE = ibus
- 
 # environment
- 
 ELECTRON_RUN_AS_NODE = 1
- 
 # environment
- 
 VSCODE_IPC_HOOK = /run/user/1000/vscode-7467bfeb-1.68.1-main.sock
- 
+# environment
+TERM = xterm-256color
 # default
- 
 .RECIPEPREFIX := 
- 
 # automatic
- 
 <F = $(notdir $<)
- 
 # default
- 
 SUFFIXES := 
+# environment
+_P9K_TTY = /dev/pts/0
  
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+VTE_VERSION = 6800
 # default
- 
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
- 
 # environment
- 
 XDG_MENU_PREFIX = gnome-
- 
 # environment
- 
 GDMSESSION = pop
- 
 # variable set hash-table stats:
- 
-# Load=109/1024=11%, Rehash=0, Collisions=14/155=9%
- 
+# Load=112/1024=11%, Rehash=0, Collisions=15/152=10%
 
- 
 # Pattern-specific Variable Values
- 
 
- 
 # No pattern-specific variable values.
- 
 
 # Directories
- 
 
- 
-# . (device 2051, inode 6432842): 11 files, no impossibilities.
- 
+# . (device 2051, inode 5781469): 10 files, no impossibilities.
 
- 
-# 11 files, no impossibilities in 1 directories.
- 
+# 10 files, no impossibilities in 1 directories.
 
- 
 # Implicit Rules
  
 
- 
 # No implicit rules.
- 
 
- 
 # Files
- 
 
- 
 # Not a target:
- 
 src/start.s:
- 
 #  Implicit rule search has been done.
- 
-#  Last modified 2022-06-15 01:35:55.342844652
- 
+#  Last modified 2022-06-17 15:18:36
 #  File has been updated.
- 
 #  Successfully updated.
- 
 
- 
-# Not a target:
- 
-src/control_module.c:
- 
+app: start.o main.o
 #  Implicit rule search has not been done.
- 
-#  Modification time never checked.
- 
-#  File has not been updated.
- 
-
- 
-app: start.o main.o gpio.o uart.o pad.o control_module.o clock_module.o execution_functions.o
- 
-#  Implicit rule search has not been done.
- 
 #  File does not exist.
- 
 #  File has been updated.
- 
 #  Needs to be updated (-q is set).
- 
 # variable set hash-table stats:
- 
 # Load=0/32=0%, Rehash=0, Collisions=0/8=0%
- 
-#  recipe to execute (from 'makefile', line 12):
- 
-	$(CHAIN)-ld $(OBJ)start.o $(OBJ)main.o $(OBJ)gpio.o $(OBJ)uart.o $(OBJ)pad.o $(OBJ)control_module.o $(OBJ)clock_module.o $(OBJ)execution_functions.o -T $(SRC)memmap.ld -o $(OBJ)main.elf
- 
+#  recipe to execute (from 'makefile', line 13):
+	$(CHAIN)-ld $(OBJ)start.o $(OBJ)main.o -T $(SRC)memmap.ld -o $(OBJ)main.elf
 	$(CHAIN)-objcopy $(OBJ)main.elf $(BIN)spl.boot -O binary
- 
 	cp $(BIN)spl.boot /tftpboot/app
- 
 
- 
-# Not a target:
- 
-src/gpio.c:
- 
-#  Implicit rule search has not been done.
- 
-#  Modification time never checked.
- 
-#  File has not been updated.
- 
-
- 
 dump:
- 
-#  Implicit rule search has not been done.
- 
-#  Modification time never checked.
- 
-#  File has not been updated.
- 
-#  recipe to execute (from 'makefile', line 49):
- 
-	$(CHAIN)-objdump -D $(OBJ)main.elf
- 
-
- 
-clean:
- 
-#  Implicit rule search has not been done.
- 
-#  Modification time never checked.
- 
-#  File has not been updated.
- 
-#  recipe to execute (from 'makefile', line 44):
- 
-	rm -rf $(OBJ)*.o
- 
-	rm -rf $(OBJ)*.elf
- 
-	rm -rf $(BIN)*.boot
- 
-
- 
-gpio.o: src/gpio.c
- 
-#  Implicit rule search has not been done.
- 
-#  Modification time never checked.
- 
-#  File has not been updated.
- 
-#  recipe to execute (from 'makefile', line 23):
- 
-	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)gpio.c -o $(OBJ)gpio.o
- 
-
- 
-# Not a target:
- 
-src/pad.c:
- 
-#  Implicit rule search has not been done.
- 
-#  Modification time never checked.
- 
-#  File has not been updated.
- 
-
- 
-# Not a target:
- 
-src/main.c:
- 
-#  Implicit rule search has not been done.
- 
-#  Modification time never checked.
- 
-#  File has not been updated.
- 
-
- 
-uart.o: src/uart.c
- 
-#  Implicit rule search has not been done.
- 
-#  Modification time never checked.
- 
-#  File has not been updated.
- 
-#  recipe to execute (from 'makefile', line 26):
- 
-	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)uart.c -o $(OBJ)uart.o
- 
-
- 
-# Not a target:
- 
-src/execution_functions.c:
- 
-#  Implicit rule search has not been done.
- 
-#  Modification time never checked.
- 
-#  File has not been updated.
- 
-
- 
-execution_functions.o: src/execution_functions.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 32):
-	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)execution_functions.c -o $(OBJ)execution_functions.o
+ 
+	$(CHAIN)-objdump -D $(OBJ)main.elf
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 27):
+	rm -rf $(OBJ)*.o
+	rm -rf $(OBJ)*.elf
+	rm -rf $(BIN)*.boot
+
+# Not a target:
+src/main.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -571,6 +308,7 @@ execution_functions.o: src/execution_functions.c
 #  Modification time never checked.
 #  File has not been updated.
 
+ 
 all: app
 #  Command line target.
 #  Implicit rule search has been done.
@@ -578,15 +316,7 @@ all: app
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
- 
 # Load=0/32=0%, Rehash=0, Collisions=0/8=0%
-
-clock_module.o: src/clock_module.c
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 38):
-	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)clock_module.c -o $(OBJ)clock_module.o
 
 start.o: src/start.s
 #  Implicit rule search has not been done.
@@ -612,48 +342,29 @@ start.o: src/start.s
 # | := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/16=6%
-#  recipe to execute (from 'makefile', line 17):
+#  recipe to execute (from 'makefile', line 18):
 	$(CHAIN)-as $(AFLAGS) $(SRC)start.s -o $(OBJ)start.o
 
 copy:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 41):
+#  recipe to execute (from 'makefile', line 24):
 	cp $(BIN)spl.boot /tftpboot/app
 
 main.o: src/main.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 20):
+#  recipe to execute (from 'makefile', line 21):
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)main.c -o $(OBJ)main.o
-
-pad.o: src/pad.c
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 29):
-	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)pad.c -o $(OBJ)pad.o
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-15 01:35:55.33884448
+#  Last modified 2022-06-29 15:43:17.716301116
 #  File has been updated.
 #  Successfully updated.
-
-# Not a target:
-src/clock_module.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/uart.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 # Not a target:
 .SUFFIXES:
@@ -661,27 +372,20 @@ src/uart.c:
 #  Modification time never checked.
 #  File has not been updated.
 
-control_module.o: src/control_module.c
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 35):
-	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)control_module.c -o $(OBJ)control_module.o
-
 # files hash-table stats:
-# Load=24/1024=2%, Rehash=0, Collisions=0/62=0%
+# Load=12/1024=1%, Rehash=0, Collisions=0/32=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 36 / storage = 351 B / avg = 9 B
-# current buf: size = 8162 B / used = 351 B / count = 36 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 23 / storage = 181 B / avg = 7 B
+# current buf: size = 8162 B / used = 181 B / count = 23 / avg = 7 B
 
-# strcache performance: lookups = 64 / hit rate = 43%
+# strcache performance: lookups = 39 / hit rate = 41%
 # hash-table stats:
-# Load=36/8192=0%, Rehash=0, Collisions=0/64=0%
-# Finished Make data base on Sat Jun 18 16:41:44 2022
+# Load=23/8192=0%, Rehash=0, Collisions=0/39=0%
+# Finished Make data base on Wed Jun 29 15:57:26 2022
 
  
