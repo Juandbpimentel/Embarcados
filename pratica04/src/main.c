@@ -18,21 +18,10 @@
 
 #include "auxiliarFunctions.h"
 
+#define TIME 0x3FFFF
 
 bool flag_btn_1;
 bool flag_btn_2;
-
-typedef enum _pinNum{
-	PIN1=1,
-	PIN2,
-	PIN3,
-	PIN4
-}pinNum;
-
-typedef enum _btnPinNum{
-	btnPIN1=1,
-	btnPIN2
-}btnPinNum;
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -109,11 +98,11 @@ void gpioIsrHandler(btnPinNum pin){
     /* Clear the status of the interrupt flags */
 	switch(pin){
 		case 1:
-			HWREG(GPIO1_IRQSTATUS_0) = 1<<14; 
+			HWREG(GPIO1_IRQSTATUS_0) |= 1<<14; 
 			flag_btn_1 = !(flag_btn_1) ;
 			break;
 		case 2:
-			HWREG(GPIO1_IRQSTATUS_0) = 1<<14; 
+			HWREG(GPIO1_IRQSTATUS_1) |= 1<<15; 
 			flag_btn_2 = !(flag_btn_2) ;
 			break;
 	}
@@ -131,10 +120,12 @@ void ISR_Handler(void){
 	unsigned int irq_number = HWREG(INTC_SIR_IRQ) & 0x7f;
 	
 	if(irq_number == 98){
+		putString("button 1 pressed!\n\r",19);
 		gpioIsrHandler(btnPIN1);
 	}
 
 	if(irq_number == 99){
+		putString("button 2 pressed!\n\r",19);
 		gpioIsrHandler(btnPIN2);
 	}
     
@@ -149,7 +140,7 @@ void ISR_Handler(void){
  * =====================================================================================
  */
 int main(void){
-	
+	pinNum pins[] = {PIN1,PIN2,PIN3,PIN4};
 	/* Hardware setup */
 	gpioSetup();
 	ledConfig();
@@ -157,29 +148,26 @@ int main(void){
 	disableWdt();
 
 	putString("gpio Interrupt...\n\r",19);
-	ledOff(PIN1);
-	ledOff(PIN2);
-	delay(0x3FFFF);
+	setLedsOFF(pins,3);
+	delay(TIME);
 
 	while(true){
 		if(flag_btn_1){
-			putString("button press!\n\r",15);
-			ledOn(PIN1);
-			delay(0x3FFFF);
-			ledOn(PIN2);
-			delay(0x3FFFF);
-			ledOff(PIN1);
-			delay(0x3FFFF);
-			ledOff(PIN2);
-			delay(0x3FFFF);
-			flag_btn_1 = false;
+			if (flag_btn_2)
+			{
+				allBlink(pins,3,TIME);
+			}else{
+				intercalatedBlink(pins,3,TIME);
+			}
+
 		}else{
-			ledOn(PIN1);
-			ledOn(PIN2);
-			delay(0x3FFFF);
-			ledOff(PIN1);
-			ledOff(PIN2);
-			delay(0x3FFFF);		
+			if (flag_btn_2)
+			{
+				sequentialBlink(pins,3,TIME);
+			}else{
+				internBlink(pins,3,TIME);
+				farEndBlink(pins,3,TIME);
+			}
 		}
 	}
 

@@ -21,14 +21,14 @@
     char getCh();
     int putString(char *str, unsigned int length);
     int getString(char *buf, unsigned int length);
-    void ledON(_pinNum);
-    void ledOFF(_pinNum);
-    int readButton(_btnPinNum);
+    void ledON(pinNum pin);
+    void ledOFF(pinNum pin);
+    int readButton(btnPinNum pin);
 
-    void intercalatedBlink(int pin[], int n, unsigned int TIME);
-    void sequentialBlink(int pin[], int n, unsigned int TIME);
-    void allBlink(int pin[], int n, unsigned int TIME);
-    void farEndBlink(int pin[], int n, unsigned int TIME);
-    void internBlink(int pin[], int n, unsigned int TIME);
-
+    void intercalatedBlink(pinNum pin[], int n, unsigned int TIME);
+    void sequentialBlink(pinNum pin[], int n, unsigned int TIME);
+    void allBlink(pinNum pin[], int n, unsigned int TIME);
+    void farEndBlink(pinNum pin[], int n, unsigned int TIME);
+    void internBlink(pinNum pin[], int n, unsigned int TIME);
+    void setLedsOFF(pinNum pins[], int n);
 #endif // 	__AUXILIAR_FUNCTIONS_H

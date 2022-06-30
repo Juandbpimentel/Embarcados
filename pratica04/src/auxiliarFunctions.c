@@ -78,9 +78,9 @@ int getString(char *buf, unsigned int length){
 }
 
 
-void intercalatedBlink(int pins[], int n, unsigned int TIME)
+void intercalatedBlink(pinNum pins[], int n, unsigned int TIME)
 {
-
+    TIME /= 2;
     // leds on
     ////ledON(pinAD15);
     ledON(pins[0]);
@@ -102,8 +102,9 @@ void intercalatedBlink(int pins[], int n, unsigned int TIME)
     delay(TIME);
     // led(GPIO1,pinExtern);
 }
-void sequentialBlink(int pins[], int n, unsigned int TIME)
+void sequentialBlink(pinNum pins[], int n, unsigned int TIME)
 {
+    TIME /= 4;
     // leds on
     // ledON(pinAD15);
     ledON(pins[0]);
@@ -139,7 +140,7 @@ void sequentialBlink(int pins[], int n, unsigned int TIME)
     delay(TIME);
     // led(GPIO1,pinExtern);
 }
-void allBlink(int pins[], int n, unsigned int TIME)
+void allBlink(pinNum pins[], int n, unsigned int TIME)
 {
     // led(GPIO1,pinExtern);
     // delay();
@@ -190,11 +191,11 @@ unsigned int readBut (btnPinNum pin){
 
 /* 
  * ===  FUNCTION  ======================================================================
- *         Name:  ledOff
+ *         Name:  ledOFF
  *  Description:  
  * =====================================================================================
  */
-void ledOff(pinNum pin){
+void ledOFF(pinNum pin){
 	switch (pin) {
 		case PIN1:
 			HWREG(GPIO1_CLEARDATAOUT) |= (1<<21);
@@ -213,11 +214,11 @@ void ledOff(pinNum pin){
 
 /* 
  * ===  FUNCTION  ======================================================================
- *         Name:  ledOn
+ *         Name:  ledON
  *  Description:  
  * =====================================================================================
  */
-void ledOn(pinNum pin){
+void ledON(pinNum pin){
 	
 	switch (pin) {
 		case PIN1:
@@ -235,15 +236,9 @@ void ledOn(pinNum pin){
 	}/* -----  end switch  ----- */
 }
 
-void delay(int iTime)
+void farEndBlink(pinNum pins[], int n, unsigned int TIME)
 {
-    volatile unsigned int ra;
-    for (ra = 0; ra < iTime; ra++)
-        ;
-}
-
-void farEndBlink(int pins[], int n, unsigned int TIME)
-{
+    TIME /= 2;
     ledON(pins[0]);
     ledON(pins[3]);
     delay(TIME);
@@ -258,8 +253,9 @@ void farEndBlink(int pins[], int n, unsigned int TIME)
     delay(TIME);
 }
 
-void internBlink(int pins[], int n, unsigned int TIME)
+void internBlink(pinNum pins[], int n, unsigned int TIME)
 {
+    TIME /= 2;
     ledON(pins[1]);
     ledON(pins[2]);
     delay(TIME);
@@ -272,4 +268,10 @@ void internBlink(int pins[], int n, unsigned int TIME)
     ledOFF(pins[1]);
     ledOFF(pins[2]);
     delay(TIME);
+}
+
+void setLedsOFF(pinNum pins[], int n){
+    for (int i = 0; i < n; i++){
+		ledOFF(pins[i]);
+	}
 }

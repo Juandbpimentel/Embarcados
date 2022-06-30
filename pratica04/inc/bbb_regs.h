@@ -56,8 +56,8 @@
 #define CM_PER_GPMCA6_REGS                      0x44E10858
 #define CM_PER_GPMCA7_REGS                      0x44E1085C
 #define CM_PER_GPMCA8_REGS                      0x44E10860
-#define CM_PER_GPMCAD12_REGS                    0x44E10830
 
+/* button pin name */
 #define CM_PER_GPMCAD14_REGS                    0x44E10838
 #define CM_PER_GPMCAD15_REGS                    0x44E1083C
 

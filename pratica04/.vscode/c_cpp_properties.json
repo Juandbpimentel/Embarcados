@@ -5,7 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/inc/*"
             ],
-            "compilerPath": "C:/msys64/mingw64/bin/gcc.exe"
+            "compilerPath":"/usr/bin/gcc"
         },
         {
             "name": "Windows",
