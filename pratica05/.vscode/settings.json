@@ -1,0 +1,9 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "*.cpp": "cpp",
+        "*.c": "c",
+        "timer.h": "c",
+        "hw_types.h": "c"
+    }
+}
