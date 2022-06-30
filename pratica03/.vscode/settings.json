@@ -1,0 +1,8 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "*.cpp": "cpp",
+        "*.c": "c",
+        "execution_functions.h": "c"
+    }
+}

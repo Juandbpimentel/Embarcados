@@ -1,0 +1,7 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/juanpimentel/Documentos/Github/Embarcados_2022/pratica 01'
+arm-none-eabi-gcc -c src/funcoes.c -o obj/funcoes.o -Iinc
+arm-none-eabi-gcc -c src/main.c -o obj/main.o -Iinc
+arm-none-eabi-gcc  obj/funcoes.o obj/main.o -lc -lrdimon -o bin/app
+make: Leaving directory '/home/juanpimentel/Documentos/Github/Embarcados_2022/pratica 01'
+ 

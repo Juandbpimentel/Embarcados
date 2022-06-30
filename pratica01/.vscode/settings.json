@@ -1,0 +1,18 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "C_Cpp.errorSquiggles": "Enabled",
+    "files.associations": {
+        "*.cpp": "cpp",
+        "*.c": "c",
+        "funcoes.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/juanpimentel/Documentos/Github/Embarcados_2022/pratica 01/bin",
+            "binaryPath": "/home/juanpimentel/Documentos/Github/Embarcados_2022/pratica 01/bin/app",
+            "binaryArgs": []
+        }
+    ]
+}
