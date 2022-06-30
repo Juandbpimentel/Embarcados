@@ -1,9 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/juanpimentel/Documentos/Github/Embarcados/pratica_02'
-arm-none-eabi-as -Iinc/ src/start.s -o obj/start.o
-arm-none-eabi-gcc -std=c99 -Wall -Iinc/ -c src/main.c -o obj/main.o
-arm-none-eabi-ld obj/start.o obj/main.o -T src/memmap.ld -o obj/main.elf
-arm-none-eabi-objcopy obj/main.elf bin/spl.boot -O binary
-cp bin/spl.boot /tftpboot/app
-make: Leaving directory '/home/juanpimentel/Documentos/Github/Embarcados/pratica_02'
- 

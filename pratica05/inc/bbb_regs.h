@@ -57,6 +57,13 @@
 #define GPIO1_OE            					0x4804C134
 #define GPIO1_SETDATAOUT   				 		0x4804C194
 #define GPIO1_CLEARDATAOUT  					0x4804C190
+#define GPIO1_IRQSTATUS_0						0x4804C02C
+#define GPIO1_IRQSTATUS_1						0x4804C030
+#define GPIO1_IRQSTATUS_SET_0  					0x4804C034
+#define GPIO1_IRQSTATUS_SET_1  					0x4804C038
+#define GPIO1_DATAIN  							0x4804C138
+#define GPIO1_RISINGDETECT  					0x4804C148
+#define GPIO1_DEBOUNCENABLE  					0x4804C150
 
 
 /* The Input clock is selected as 24MHz. So for 1ms set the count to 0x5DC0. 
