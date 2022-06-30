@@ -52,6 +52,8 @@
 #define SOC_CM_DPLL_CLKSEL_TIMER7_CLK           0x44E00504
 
 /* pin name */
+#define CM_PER_GPMCA5_REGS                      0x44E10854
+#define CM_PER_GPMCA6_REGS                      0x44E10858
 #define CM_PER_GPMCA7_REGS                      0x44E1085C
 #define CM_PER_GPMCA8_REGS                      0x44E10860
 #define CM_PER_GPMCAD12_REGS                    0x44E10830
@@ -67,6 +69,7 @@
 #define GPIO1_OE            					0x4804C134
 #define GPIO1_DATAIN  							0x4804C138
 #define GPIO1_RISINGDETECT  					0x4804C148
+#define GPIO1_DEBOUNCENABLE  					0x4804C150
 #define GPIO1_CLEARDATAOUT  					0x4804C190
 #define GPIO1_SETDATAOUT   				 		0x4804C194
 

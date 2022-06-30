@@ -1,5 +1,5 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/juanpimentel/Documentos/Github/Embarcados/pratica_03'
+make.exe --dry-run --always-make --keep-going --print-directory
+make: Entering directory 'd:/Github/Embarcados/pratica_03'
 arm-none-eabi-as -mfpu=neon src/start.s -o obj/start.o
 arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ -c src/main.c -o obj/main.o
 arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ -c src/gpio.c -o obj/gpio.o
@@ -11,5 +11,5 @@ arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ 
 arm-none-eabi-ld obj/start.o obj/main.o obj/gpio.o obj/uart.o obj/pad.o obj/control_module.o obj/clock_module.o obj/execution_functions.o -T src/memmap.ld -o obj/main.elf
 arm-none-eabi-objcopy obj/main.elf bin/spl.boot -O binary
 cp bin/spl.boot /tftpboot/app
-make: Leaving directory '/home/juanpimentel/Documentos/Github/Embarcados/pratica_03'
+make: Leaving directory 'd:/Github/Embarcados/pratica_03'
  
