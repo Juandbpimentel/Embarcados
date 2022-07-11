@@ -18,7 +18,7 @@
 
 ## Código de boot sem Watchdog e pelo cabo de rede
 
-    set app "mw 0x44e35048 0xaaaa; sleep 1; mw 0x44e35048 0x5555;setenv ipaddr 10.4.1.2; setenv serverip 10.4.1.1; tftp 0x80000000 /tftpboot/download.bin; echo "***Booting to BareMetal ***";go 0x80000000;"
+    setenv app "mw 0x44e35048 0xaaaa; sleep 1; mw 0x44e35048 0x5555;setenv ipaddr 10.4.1.2; setenv serverip 10.4.1.1; tftp 0x80000000 /tftpboot/download.bin; echo "***Booting to BareMetal ***";go 0x80000000;"
 
 ## Código de boot com Watchdog e sem cabo de rede
 

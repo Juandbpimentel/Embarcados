@@ -18,7 +18,7 @@
 
 #include "auxiliarFunctions.h"
 
-#define TIME 0x3FFFF
+#define TIME 0x3FFFFFF
 
 bool flag_btn_1;
 bool flag_btn_2;
@@ -150,23 +150,23 @@ int main(void){
 	putString("gpio Interrupt...\n\r",19);
 	setLedsOFF(pins,3);
 	delay(TIME);
-
+	putString("esta ligado\n\r",13);
 	while(true){
 		if(flag_btn_1){
 			if (flag_btn_2)
 			{
-				allBlink(pins,3,TIME);
+				allBlink(pins,4,TIME);
 			}else{
-				intercalatedBlink(pins,3,TIME);
+				intercalatedBlink(pins,4,TIME);
 			}
 
 		}else{
 			if (flag_btn_2)
 			{
-				sequentialBlink(pins,3,TIME);
+				sequentialBlink(pins,4,TIME);
 			}else{
-				internBlink(pins,3,TIME);
-				farEndBlink(pins,3,TIME);
+				internBlink(pins,4,TIME);
+				farEndBlink(pins,4,TIME);
 			}
 		}
 	}

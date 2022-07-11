@@ -1,7 +1,6 @@
 #ifndef __AUXILIAR_FUNCTIONS_H
     #define __AUXILIAR_FUNCTIONS_H
-    #include "timer.h"
-
+    #include "timers.h"
     typedef enum _pinNum{
         PIN1=1,
         PIN2,
@@ -28,5 +27,8 @@
     void allBlink(pinNum pin[], int n, unsigned int TIME);
     void farEndBlink(pinNum pin[], int n, unsigned int TIME);
     void internBlink(pinNum pin[], int n, unsigned int TIME);
+    void goOnGoOutBlink(pinNum pins[], int n,unsigned int TIME);
     void setLedsOFF(pinNum pins[], int n);
+    void delay(unsigned int mSec);
+    void timerIrqHandler(void);
 #endif // 	__AUXILIAR_FUNCTIONS_H

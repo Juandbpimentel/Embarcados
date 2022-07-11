@@ -9,10 +9,10 @@ BIN=bin/
 
 all: app
 
-app: start.o main.o timer.o auxiliarFunctions.o
-	$(CHAIN)-ld $(OBJ)start.o $(OBJ)main.o $(OBJ)auxiliarFunctions.o $(OBJ)timer.o -T $(SRC)memmap.ld -o $(OBJ)main.elf
+app: start.o timer.o auxiliarFunctions.o main.o
+	$(CHAIN)-ld  $(IPATH) $(OBJ)start.o $(OBJ)main.o $(OBJ)auxiliarFunctions.o $(OBJ)timers.o -T $(SRC)memmap.ld -o $(OBJ)main.elf
 	$(CHAIN)-objcopy $(OBJ)main.elf $(BIN)spl.boot -O binary
-	cp $(BIN)spl.boot /tftpboot/appTimer.bin
+	cp $(BIN)spl.boot /tftpboot/app
 
 start.o: $(SRC)start.s
 	$(CHAIN)-as $(AFLAGS) $(SRC)start.s -o $(OBJ)start.o
@@ -20,14 +20,14 @@ start.o: $(SRC)start.s
 main.o: $(SRC)main.c
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)main.c -o $(OBJ)main.o
 
-timer.o: $(SRC)timer.c
-	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)timer.c -o $(OBJ)timer.o
+timer.o: $(SRC)timers.c
+	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)timers.c -o $(OBJ)timers.o
 
 auxiliarFunctions.o: $(SRC)auxiliarFunctions.c
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)auxiliarFunctions.c -o $(OBJ)auxiliarFunctions.o
                                         
 copy:
-	cp $(BIN)spl.boot /tftpboot/appTimer.bin
+	cp $(BIN)spl.boot /tftpboot/app
 
 clean:
 	rm -rf $(OBJ)*.o

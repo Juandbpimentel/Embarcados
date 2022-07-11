@@ -3,9 +3,11 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/inc/*"
+                "${workspaceFolder}/inc/*",
+                "${workspaceFolder}/inc"
             ],
-            "compilerPath":"/usr/bin/gcc"
+            "compilerPath": "/usr/bin/gcc",
+            "configurationProvider": "ms-vscode.makefile-tools"
         },
         {
             "name": "Windows",

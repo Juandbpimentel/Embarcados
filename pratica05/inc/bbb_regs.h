@@ -28,6 +28,7 @@
 #define INTC_CONTROL    						0x48200048
 #define INTC_ILR        						0x48200100
 #define INTC_MIR_CLEAR2 						0x482000C8
+#define INTC_MIR_CLEAR3 						0x482000E8
 #define INTC_SYSCONFIG							0x48200010
 #define INTC_SYSSTATUS							0x48200014
 #define INTC_THRESHOLD							0x48200068
@@ -65,6 +66,15 @@
 #define GPIO1_RISINGDETECT  					0x4804C148
 #define GPIO1_DEBOUNCENABLE  					0x4804C150
 
+/* pin name */
+#define CM_PER_GPMCA5_REGS                      0x44E10854
+#define CM_PER_GPMCA6_REGS                      0x44E10858
+#define CM_PER_GPMCA7_REGS                      0x44E1085C
+#define CM_PER_GPMCA8_REGS                      0x44E10860
+
+/* button pin name */
+#define CM_PER_GPMCAD14_REGS                    0x44E10838
+#define CM_PER_GPMCAD15_REGS                    0x44E1083C
 
 /* The Input clock is selected as 24MHz. So for 1ms set the count to 0x5DC0. 
  *If the input clock is changed to different source this value has to be updated 

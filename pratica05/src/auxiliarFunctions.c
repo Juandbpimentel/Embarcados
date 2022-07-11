@@ -1,5 +1,10 @@
 #include "auxiliarFunctions.h"
 
+#ifndef _FLAG_TIMERS
+        #define _FLAG_TIMERS
+        static bool flag_timers;
+    #endif
+
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  disableWdt
@@ -14,18 +19,6 @@ void disableWdt(void){
 	while((HWREG(WDT_WWPS) & (1<<4)));
 }
 
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  delay
- *  Description:  
- * =====================================================================================
- */
-void delay(unsigned int mSec){
-    volatile unsigned int count;
-    
-	for(count=0; count<mSec; count++);
-
-}
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -255,7 +248,6 @@ void farEndBlink(pinNum pins[], int n, unsigned int TIME)
 
 void internBlink(pinNum pins[], int n, unsigned int TIME)
 {
-    TIME /= 2;
     ledON(pins[1]);
     ledON(pins[2]);
     delay(TIME);
@@ -270,8 +262,96 @@ void internBlink(pinNum pins[], int n, unsigned int TIME)
     delay(TIME);
 }
 
+void goOnGoOutBlink(pinNum pins[], int n, unsigned int TIME)
+{
+    for (int i = 0; i < n; i++){
+        delay(TIME);
+        ledON(pins[i]);
+    }
+    for (int i = 0; i < n; i++){
+        delay(TIME);
+        ledOFF(pins[i]);
+    }
+    for (int i = n - 1; i >= 0; i--)
+    {
+        delay(TIME);
+        ledON(pins[i]);
+    }
+    for (int i = n - 1; i >= 0; i--)
+    {
+        delay(TIME);
+        ledOFF(pins[i]);
+    }
+}
+
 void setLedsOFF(pinNum pins[], int n){
     for (int i = 0; i < n; i++){
 		ledOFF(pins[i]);
 	}
+}
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  delay
+ *  Description:  
+ * =====================================================================================
+ */
+void delay(unsigned int mSec){
+#ifdef DELAY_USE_INTERRUPT
+    unsigned int countVal = TIMER_OVERFLOW - (mSec * TIMER_1MS_COUNT);
+
+   	/* Wait for previous write to complete */
+	DMTimerWaitForWrite(0x2);
+
+    /* Load the register with the re-load value */
+	HWREG(DMTIMER_TCRR) = countVal;
+	
+	flag_timers = false;
+
+    /* Enable the DMTimer interrupts */
+	HWREG(DMTIMER_IRQENABLE_SET) = 0x2; 
+
+    /* Start the DMTimer */
+	timerEnable();
+
+    while(flag_timers == false);
+
+    /* Disable the DMTimer interrupts */
+	HWREG(DMTIMER_IRQENABLE_CLR) = 0x2; 
+#else
+    while(mSec != 0){
+        /* Wait for previous write to complete */
+        DMTimerWaitForWrite(0x2);
+
+        /* Set the counter value. */
+        HWREG(DMTIMER_TCRR) = 0x0;
+
+        timerEnable();
+
+        while(HWREG(DMTIMER_TCRR) < TIMER_1MS_COUNT);
+
+        /* Stop the timer */
+        HWREG(DMTIMER_TCLR) &= ~(0x00000001u);
+
+        mSec--;
+    }
+#endif
+}
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  timerIrqHandler
+ *  Description:  
+ * =====================================================================================
+ */
+void timerIrqHandler(void){
+
+    /* Clear the status of the interrupt flags */
+	HWREG(DMTIMER_IRQSTATUS) = 0x2; 
+
+	flag_timers = true;
+
+    /* Stop the DMTimer */
+	timerDisable();
+
 }

@@ -3,7 +3,8 @@
     "files.associations": {
         "*.cpp": "cpp",
         "*.c": "c",
-        "timer.h": "c",
-        "hw_types.h": "c"
+        "*.h":"c",
+        "auxiliarfunctions.h": "c",
+        "timers.h": "c",
     }
 }
