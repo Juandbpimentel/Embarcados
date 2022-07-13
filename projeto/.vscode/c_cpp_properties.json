@@ -1,0 +1,31 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/inc/*"
+            ],
+            "compilerPath":"/usr/bin/gcc"
+        },
+        {
+            "name": "Windows",
+            "includePath": [
+                "${workspaceFolder}/inc/*"
+            ],
+            "macFrameworkPath": [],
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++23",
+            "intelliSenseMode": "windows-gcc-x64",
+            "mergeConfigurations": true,
+            "compilerPath": "C:/msys64/mingw64/bin/gcc.exe",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/inc/*",
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}
