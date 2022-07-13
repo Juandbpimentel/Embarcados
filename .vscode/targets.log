@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jun 30 10:30:46 2022
+# Make data base, printed on Wed Jul 13 13:45:27 2022
 
 # Variables
 
@@ -21,7 +21,7 @@ GNOME_SHELL_SESSION_MODE = pop
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-c32fcd78-8088-448a-9891-fb0e156fed9d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-19acf432-33b4-41a6-a515-1797d053bab7.sock
 # environment
 VSCODE_CWD = /home/juanpimentel/Documentos/Github/Embarcados
 # environment
@@ -45,7 +45,7 @@ LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 XDG_DATA_DIRS = /usr/share/pop:/usr/share/gnome:/home/juanpimentel/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/
 # environment
-OLDPWD = /home/juanpimentel/Documentos/Github/Embarcados/pratica05
+OLDPWD = /home/juanpimentel
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
@@ -63,7 +63,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.478
+GNOME_TERMINAL_SERVICE = :1.725
 # makefile
 MAKEFLAGS = pqrR
 # makefile
@@ -97,13 +97,13 @@ ZSH = /home/juanpimentel/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 13084
+VSCODE_PID = 46630
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/juan-pop-os:@/tmp/.ICE-unix/2436,unix/juan-pop-os:/tmp/.ICE-unix/2436
+SESSION_MANAGER = local/juan-pop-os:@/tmp/.ICE-unix/1482,unix/juan-pop-os:/tmp/.ICE-unix/1482
 # automatic
 *F = $(notdir $*)
 # environment
@@ -129,7 +129,7 @@ XMODIFIERS = @im=ibus
 # environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/ff52acfa_7da2_4249_bb52_c42644fe0f21
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/c670e1df_3527_40a5_a7fc_f19b10a8c233
 # environment
 MAKELEVEL := 0
 # default
@@ -167,7 +167,7 @@ LOGNAME = juanpimentel
 # makefile
 .DEFAULT_GOAL := 
 # environment
-SYSTEMD_EXEC_PID = 2456
+SYSTEMD_EXEC_PID = 1502
 # environment
 DISPLAY = :1
 # environment
@@ -229,9 +229,9 @@ GDMSESSION = pop
 
 # Directories
 
-# . (device 2051, inode 5781779): 14 files, no impossibilities.
+# . (device 2051, inode 5781779): 8 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 8 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -280,14 +280,13 @@ GNUmakefile:
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
- 
 
-# strcache buffers: 1 (0) / strings = 22 / storage = 216 B / avg = 9 B
-# current buf: size = 8162 B / used = 216 B / count = 22 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 16 / storage = 154 B / avg = 9 B
+# current buf: size = 8162 B / used = 154 B / count = 16 / avg = 9 B
 
-# strcache performance: lookups = 25 / hit rate = 12%
+# strcache performance: lookups = 19 / hit rate = 15%
 # hash-table stats:
-# Load=22/8192=0%, Rehash=0, Collisions=0/25=0%
-# Finished Make data base on Thu Jun 30 10:30:46 2022
+# Load=16/8192=0%, Rehash=0, Collisions=0/19=0%
+# Finished Make data base on Wed Jul 13 13:45:27 2022
 
  
