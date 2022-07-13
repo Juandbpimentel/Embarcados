@@ -3,8 +3,9 @@
 
     #include "bbb_regs.h"
     #include "hw_types.h"
+    #include "address_regs.h"
 
-    #define DELAY_USE_INTERRUPT			1
+    #define DELAY_USE_INTERRUPT			0
 
     /**
      * \brief   This macro will check for write POSTED status
@@ -21,8 +22,8 @@
      **/
 
     #define DMTimerWaitForWrite(reg)   \
-                if(HWREG(DMTIMER_TSICR) & 0x4)\
-                while((reg & HWREG(DMTIMER_TWPS)));
+                if(HWREG(SOC_DMTIMER_7_REGS+DMTIMER_TSICR) & 0x4)\
+                while((reg & HWREG(SOC_DMTIMER_7_REGS+DMTIMER_TWPS)));
 
     void timerEnable();
     void timerDisable();

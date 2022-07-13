@@ -11,23 +11,34 @@ extern "C" {
 #define SOC_WDT_0_REGS										(0x44E33000)
 #define SOC_UART_0_REGS										(0x44E09000)
 #define SOC_DMTIMER_7_REGS									(0x4804A000)
+#define SOC_CONTROL_REGS									(0x44E10000)
+#define SOC_CM_PER_REGS										(0x44E00000)
 #define INTC_BASE											(0x48200000)
-#define CM_PER_BASE                                         (0x44E00000)
 
 /*                       GPIO register offsets                        */
-#define CM_PER_GPIO1_CLKCTRL_REGS							(0x000000AC)
-#define CM_PER_GPIO2_CLKCTRL_REGS							(0x000000B0)
-#define GPIO_IRQSTATUS_0_REGS								(0x0000002C)
-#define GPIO_IRQSTATUS_1_REGS								(0x00000030)
-#define GPIO_IRQSTATUS_SET_0_REGS							(0x00000034)
-#define GPIO_IRQSTATUS_SET_1_REGS							(0x00000038)
-#define GPIO_IRQSTATUS_CLR_0_REGS							(0x0000003C)
-#define GPIO_IRQSTATUS_CLR_1_REGS							(0x00000040)
-#define GPIO_OE_REGS										(0x00000134)
-#define GPIO_DATAIN_REGS									(0x00000138)
-#define GPIO_DATAOUT_REGS									(0x0000013C)
-#define GPIO_RISINGDETECT_REGS								(0x00000148)
+#define CM_PER_GPIO1							            (0x000000AC)
+#define CM_PER_GPIO2							            (0x000000B0)
+#define GPIO_IRQSTATUS_0								    (0x0000002C)
+#define GPIO_IRQSTATUS_1								    (0x00000030)
+#define GPIO_IRQSTATUS_SET_0							    (0x00000034)
+#define GPIO_IRQSTATUS_SET_1							    (0x00000038)
+#define GPIO_IRQSTATUS_CLR_0							    (0x0000003C)
+#define GPIO_IRQSTATUS_CLR_1							    (0x00000040)
+#define GPIO_OE										        (0x00000134)
+#define GPIO_DATAIN									        (0x00000138)
+#define GPIO_DATAOUT									    (0x0000013C)
+#define GPIO_RISINGDETECT								    (0x00000148)
 #define GPIO_DEBOUNCENABLE									(0x00000150)
+
+/*                       Control module GPIO registers                */
+#define CONF_GPMC_BEN_1							            (0x00000878)
+#define CONF_GPMC_A0					    			    (0x00000840)
+#define CONF_GPMC_AD2								        (0x00000808)
+#define CONF_GPMC_AD3								        (0x0000080C)
+#define CONF_GPMC_AD6								        (0x00000818)
+#define CONF_GPMC_AD7								        (0x0000081C)
+#define CONF_LCD_VSYNC							            (0x000008E0)
+#define CONF_LCD_PCLK							            (0x000008E8)
 
 /*                          Timer registers                           */
 #define CM_PER_TIMER7_CLKCTRL								(0x0000007C)
@@ -43,6 +54,14 @@ extern "C" {
 #define INTC_MIR_CLEAR1										(0x000000A8)
 #define INTC_MIR_CLEAR2										(0x000000C8)
 #define INTC_MIR_CLEAR3										(0x000000E8)
+#define INTC_SIR_IRQ    						            (0x00000040)
+
+/*                    	  Interrupt acronyns		                  */
+#define GPIO_INT_1_A    						            (0x00000062)
+#define GPIO_INT_1_B    						            (0x00000063)
+#define GPIO_INT_2_A    						            (0x00000020)
+#define GPIO_INT_2_B    						            (0x00000021)
+#define TINT7		    						            (0x0000005F)
 
 /*                   Watch dog registers offsets                      */
 #define WDT_WWPS											(0x00000034)
@@ -53,9 +72,16 @@ extern "C" {
 #define UART_THR											(0x00000000)
 #define UART_LSR											(0x00000014)
 
-/*                            Constants                               */
+/*                        Pin module config                           */
+#define GPIO_FUNC											(0x00000007)
+#define PAD_PULLUP_PULLDOWN_EN								(0x00000008)
+#define PAD_INPUT_VALUE_EN									(0x00000020)
+
+/*                       Clock module config                          */
 #define MODULEMODE_ENABLE									(0x00000002)
-#define OPTFCLKEN_GPIO_1_GDBCLK_FCLK_EN						(0x00040000)
+#define OPTFCLKEN_GPIO_GDBCLK_FCLK_EN						(0x00040000)
+
+/*                         Timer constants                            */
 #define TIMER_1MS_COUNT										(0x00005DC0)
 #define TIMER_OVERFLOW										(0xFFFFFFFF)
 

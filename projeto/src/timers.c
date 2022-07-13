@@ -11,7 +11,7 @@ void timerEnable(){
 	DMTimerWaitForWrite(0x1);
 
     /* Start the timer */
-    HWREG(DMTIMER_TCLR) |= 0x1;
+    HWREG(SOC_DMTIMER_7_REGS+DMTIMER_TCLR) |= 0x1;
 }/* -----  end of function timerEnable  ----- */
 
 /* 
@@ -25,5 +25,5 @@ void timerDisable(){
 	DMTimerWaitForWrite(0x1);
 
     /* Start the timer */
-    HWREG(DMTIMER_TCLR) &= ~(0x1);
+    HWREG(SOC_DMTIMER_7_REGS+DMTIMER_TCLR) &= ~(0x1);
 }/* -----  end of function timerEnable  ----- */

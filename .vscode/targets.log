@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jul 13 13:45:27 2022
+# Make data base, printed on Wed Jul 13 14:00:42 2022
 
 # Variables
 
@@ -21,7 +21,7 @@ GNOME_SHELL_SESSION_MODE = pop
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-19acf432-33b4-41a6-a515-1797d053bab7.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-38825fc3-2849-48e6-896d-f8442acb15f2.sock
 # environment
 VSCODE_CWD = /home/juanpimentel/Documentos/Github/Embarcados
 # environment
@@ -63,7 +63,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.725
+GNOME_TERMINAL_SERVICE = :1.795
 # makefile
 MAKEFLAGS = pqrR
 # makefile
@@ -97,7 +97,7 @@ ZSH = /home/juanpimentel/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 46630
+VSCODE_PID = 47961
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -129,7 +129,7 @@ XMODIFIERS = @im=ibus
 # environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/c670e1df_3527_40a5_a7fc_f19b10a8c233
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/b545fe96_26de_417b_af89_12b150733379
 # environment
 MAKELEVEL := 0
 # default
@@ -280,6 +280,7 @@ GNUmakefile:
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
+ 
 
 # strcache buffers: 1 (0) / strings = 16 / storage = 154 B / avg = 9 B
 # current buf: size = 8162 B / used = 154 B / count = 16 / avg = 9 B
@@ -287,6 +288,6 @@ GNUmakefile:
 # strcache performance: lookups = 19 / hit rate = 15%
 # hash-table stats:
 # Load=16/8192=0%, Rehash=0, Collisions=0/19=0%
-# Finished Make data base on Wed Jul 13 13:45:27 2022
+# Finished Make data base on Wed Jul 13 14:00:43 2022
 
  

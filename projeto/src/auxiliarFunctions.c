@@ -71,83 +71,83 @@ int getString(char *buf, unsigned int length){
 }
 
 
-void intercalatedBlink(pinNum pins[], int n, unsigned int TIME)
+void intercalatedBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
     TIME /= 2;
     // leds on
     ////ledON(pinAD15);
-    ledON(pins[0]);
-    ledON(pins[2]);
+    ledON(gpio,pins[0]);
+    ledON(gpio,pins[2]);
     delay(TIME);
     ////ledOFF(pinAD15);
-    ledON(pins[1]);
-    ledON(pins[3]);
+    ledON(gpio,pins[1]);
+    ledON(gpio,pins[3]);
     delay(TIME);
 
     // leds off
     ////ledOFF(pinAD15);
-    ledOFF(pins[0]);
-    ledOFF(pins[2]);
+    ledOFF(gpio,pins[0]);
+    ledOFF(gpio,pins[2]);
     delay(TIME);
     ////ledOFF(pinAD15);
-    ledOFF(pins[1]);
-    ledOFF(pins[3]);
+    ledOFF(gpio,pins[1]);
+    ledOFF(gpio,pins[3]);
     delay(TIME);
     // led(GPIO1,pinExtern);
 }
-void sequentialBlink(pinNum pins[], int n, unsigned int TIME)
+void sequentialBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
     TIME /= 4;
     // leds on
     // ledON(pinAD15);
-    ledON(pins[0]);
+    ledON(gpio,pins[0]);
     delay(TIME);
 
     // ledOFF(pinAD15);
-    ledON(pins[1]);
+    ledON(gpio,pins[1]);
     delay(TIME);
 
     // ledON(pinAD15);
-    ledON(pins[2]);
+    ledON(gpio,pins[2]);
     delay(TIME);
 
     // ledOFF(pinAD15);
-    ledON(pins[3]);
+    ledON(gpio,pins[3]);
     delay(TIME);
 
     // leds off
     // ledON(pinAD15);
-    ledOFF(pins[3]);
+    ledOFF(gpio,pins[3]);
     delay(TIME);
 
     // ledOFF(pinAD15);
-    ledOFF(pins[2]);
+    ledOFF(gpio,pins[2]);
     delay(TIME);
 
     // ledON(pinAD15);
-    ledOFF(pins[1]);
+    ledOFF(gpio,pins[1]);
     delay(TIME);
 
     // ledOFF(pinAD15);
-    ledOFF(pins[0]);
+    ledOFF(gpio,pins[0]);
     delay(TIME);
     // led(GPIO1,pinExtern);
 }
-void allBlink(pinNum pins[], int n, unsigned int TIME)
+void allBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
     // led(GPIO1,pinExtern);
     // delay();
     // ledON(pinAD15);
     for (int i = 0; i < n; i++)
     {
-        ledON(pins[i]);
+        ledON(gpio,pins[i]);
     }
 
     delay(TIME);
 
     for (int i = n - 1; i >= 0; i--)
     {
-        ledOFF(pins[i]);
+        ledOFF(gpio,pins[i]);
     }
     // ledOFF(pinAD15);
     delay(TIME);
@@ -158,135 +158,86 @@ void allBlink(pinNum pins[], int n, unsigned int TIME)
 **                INTERNAL FUNCTION PROTOTYPES
 *****************************************************************************/
 
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  readBut
- *  Description:  
- * =====================================================================================
- */
-unsigned int readBut (btnPinNum pin){
+unsigned int readBut (unsigned int gpio,btnPinNum pin){
 	unsigned int temp;
-	switch (pin)
-	{
-	case 1:
-		temp = HWREG(GPIO1_DATAIN)&1<<14;
-		break;
-	case 2:
-		temp = HWREG(GPIO1_DATAIN)&1<<15;
-		break;
-	default:
-		break;
-	}
+	temp = HWREG(gpio+GPIO_DATAIN)&1<<pin;
+	
 	
 	
 	return(temp);
 }/* -----  end of function readBut  ----- */
 
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  ledOFF
- *  Description:  
- * =====================================================================================
- */
-void ledOFF(pinNum pin){
-	switch (pin) {
-		case PIN1:
-			HWREG(GPIO1_CLEARDATAOUT) |= (1<<21);
-			break;
-		case PIN2:	
-			HWREG(GPIO1_CLEARDATAOUT) |= (1<<22);
-			break;
-		case PIN3:
-			HWREG(GPIO1_CLEARDATAOUT) |= (1<<23);
-			break;
-		case PIN4:	
-			HWREG(GPIO1_CLEARDATAOUT) |= (1<<24);
-			break;
-	}/* -----  end switch  ----- */
+
+void ledOFF(unsigned int gpio,pinNum pin){
+	HWREG(gpio+GPIO_DATAOUT) &= ~(1<<pin);
+
 }
 
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  ledON
- *  Description:  
- * =====================================================================================
- */
-void ledON(pinNum pin){
-	
-	switch (pin) {
-		case PIN1:
-			HWREG(GPIO1_SETDATAOUT) |= (1<<21);
-			break;
-		case PIN2:	
-			HWREG(GPIO1_SETDATAOUT) |= (1<<22);
-			break;
-		case PIN3:
-			HWREG(GPIO1_SETDATAOUT) |= (1<<23);
-			break;
-		case PIN4:	
-			HWREG(GPIO1_SETDATAOUT) |= (1<<24);
-			break;
-	}/* -----  end switch  ----- */
+
+void ledON(unsigned int gpio,pinNum pin){
+
+    HWREG(gpio+GPIO_DATAOUT) |= (1<<pin);
+
 }
 
-void farEndBlink(pinNum pins[], int n, unsigned int TIME)
+void farEndBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
     TIME /= 2;
-    ledON(pins[0]);
-    ledON(pins[3]);
+    ledON(gpio,pins[0]);
+    ledON(gpio,pins[3]);
     delay(TIME);
-    ledOFF(pins[0]);
-    ledOFF(pins[3]);
+    ledOFF(gpio,pins[0]);
+    ledOFF(gpio,pins[3]);
     delay(TIME);
-    ledON(pins[0]);
-    ledON(pins[3]);
+    ledON(gpio,pins[0]);
+    ledON(gpio,pins[3]);
     delay(TIME);
-    ledOFF(pins[0]);
-    ledOFF(pins[3]);
+    ledOFF(gpio,pins[0]);
+    ledOFF(gpio,pins[3]);
     delay(TIME);
 }
 
-void internBlink(pinNum pins[], int n, unsigned int TIME)
+void internBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
-    ledON(pins[1]);
-    ledON(pins[2]);
+    ledON(gpio,pins[1]);
+    ledON(gpio,pins[2]);
     delay(TIME);
-    ledOFF(pins[1]);
-    ledOFF(pins[2]);
+    ledOFF(gpio,pins[1]);
+    ledOFF(gpio,pins[2]);
     delay(TIME);
-    ledON(pins[1]);
-    ledON(pins[2]);
+    ledON(gpio,pins[1]);
+    ledON(gpio,pins[2]);
     delay(TIME);
-    ledOFF(pins[1]);
-    ledOFF(pins[2]);
+    ledOFF(gpio,pins[1]);
+    ledOFF(gpio,pins[2]);
     delay(TIME);
 }
 
-void goOnGoOutBlink(pinNum pins[], int n, unsigned int TIME)
+void goOnGoOutBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
     for (int i = 0; i < n; i++){
         delay(TIME);
-        ledON(pins[i]);
+        ledON(gpio,pins[i]);
     }
     for (int i = 0; i < n; i++){
         delay(TIME);
-        ledOFF(pins[i]);
+        ledOFF(gpio,pins[i]);
     }
     for (int i = n - 1; i >= 0; i--)
     {
         delay(TIME);
-        ledON(pins[i]);
+        ledON(gpio,pins[i]);
     }
     for (int i = n - 1; i >= 0; i--)
     {
         delay(TIME);
-        ledOFF(pins[i]);
+        ledOFF(gpio,pins[i]);
     }
 }
 
-void setLedsOFF(pinNum pins[], int n){
+void setLedsOFF(unsigned int gpio,pinNum pins[], int n){
     for (int i = 0; i < n; i++){
-		ledOFF(pins[i]);
+		ledOFF(gpio,pins[i]);
 	}
 }
 
@@ -297,7 +248,7 @@ void setLedsOFF(pinNum pins[], int n){
  * =====================================================================================
  */
 void delay(unsigned int mSec){
-#ifdef DELAY_USE_INTERRUPT
+#if DELAY_USE_INTERRUPT
     unsigned int countVal = TIMER_OVERFLOW - (mSec * TIMER_1MS_COUNT);
 
    	/* Wait for previous write to complete */
@@ -324,14 +275,14 @@ void delay(unsigned int mSec){
         DMTimerWaitForWrite(0x2);
 
         /* Set the counter value. */
-        HWREG(DMTIMER_TCRR) = 0x0;
+        HWREG(SOC_DMTIMER_7_REGS+DMTIMER_TCRR) = 0x0;
 
         timerEnable();
 
-        while(HWREG(DMTIMER_TCRR) < TIMER_1MS_COUNT);
+        while(HWREG(SOC_DMTIMER_7_REGS+DMTIMER_TCRR) < TIMER_1MS_COUNT);
 
         /* Stop the timer */
-        HWREG(DMTIMER_TCLR) &= ~(0x00000001u);
+        HWREG(SOC_DMTIMER_7_REGS+DMTIMER_TCLR) &= ~(0x00000001u);
 
         mSec--;
     }
@@ -347,7 +298,7 @@ void delay(unsigned int mSec){
 void timerIrqHandler(void){
 
     /* Clear the status of the interrupt flags */
-	HWREG(DMTIMER_IRQSTATUS) = 0x2; 
+	HWREG(SOC_DMTIMER_7_REGS+DMTIMER_IRQSTATUS) = 0x2; 
 
 	flag_timers = true;
 

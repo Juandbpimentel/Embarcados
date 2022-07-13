@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.cpp": "cpp",
+			"*.c": "c",
+			"address_regs.h": "c",
+			"bbb_regs.h": "c",
+			"timers.h": "c",
+			"limits": "c",
+			"*.tcc": "c",
+			"type_traits": "c",
+			"cstdio": "c"
+		}
+	}
+}
