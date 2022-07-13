@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Tue Jul 12 20:25:51 2022
+# Make data base, printed on Wed Jul 13 14:01:51 2022
 
 # Variables
 
@@ -23,7 +24,7 @@ GNOME_SHELL_SESSION_MODE = pop
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-68d4f68c-0850-487a-8b54-dd153c220b53.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-dd241b05-5e77-407f-824a-a21d4eb625ee.sock
 # environment
 VSCODE_CWD = /home/juanpimentel/Documentos/Github/Embarcados/projeto
 # environment
@@ -51,7 +52,7 @@ CHAINPATH =
 # environment
 XDG_DATA_DIRS = /usr/share/pop:/usr/share/gnome:/home/juanpimentel/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/
 # environment
-OLDPWD = /home/juanpimentel/Documentos/Github/Embarcados
+OLDPWD = /home/juanpimentel
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
@@ -69,7 +70,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.105
+GNOME_TERMINAL_SERVICE = :1.822
 # makefile
 MAKEFLAGS = pqrR
 # makefile
@@ -105,7 +106,7 @@ CHAIN = $(CHAINPATH)arm-none-eabi
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 30203
+VSCODE_PID = 48422
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -137,7 +138,7 @@ XMODIFIERS = @im=ibus
 # environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/2e774462_1ccb_4252_bab1_6475766ae492
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/1e671492_7592_4d57_bc47_0556ec7acdb5
 # environment
 MAKELEVEL := 0
 # default
@@ -177,7 +178,7 @@ LOGNAME = juanpimentel
 # makefile
 .DEFAULT_GOAL := all
 # environment
-SYSTEMD_EXEC_PID = 1704
+SYSTEMD_EXEC_PID = 1502
 # environment
 DISPLAY = :1
 # environment
@@ -276,13 +277,13 @@ auxiliarFunctions.o: src/auxiliarFunctions.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 #  recipe to execute (from 'makefile', line 27):
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)auxiliarFunctions.c -o $(OBJ)auxiliarFunctions.o
 
 dump:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 38):
 	$(CHAIN)-objdump -D $(OBJ)main.elf
@@ -404,6 +405,6 @@ makefile:
 # strcache performance: lookups = 49 / hit rate = 40%
 # hash-table stats:
 # Load=29/8192=0%, Rehash=0, Collisions=0/49=0%
-# Finished Make data base on Tue Jul 12 20:25:51 2022
+# Finished Make data base on Wed Jul 13 14:01:51 2022
 
  
