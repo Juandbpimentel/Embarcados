@@ -1,7 +1,6 @@
 #ifndef _TIMERS_H
     #define _TIMERS_H
 
-    #include "bbb_regs.h"
     #include "hw_types.h"
     #include "address_regs.h"
 

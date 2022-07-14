@@ -27,9 +27,9 @@ void disableWdt(void){
  * =====================================================================================
  */
 void putCh(char c){
-	while(!(HWREG(UART0_LSR) & (1<<5)));
+	while(!(HWREG(UART0_BASE+UART_LSR) & (1<<5)));
 
-	HWREG(UART0_THR) = c;
+	HWREG(UART0_BASE+UART_THR) = c;
 }
 
 /* 
@@ -39,9 +39,9 @@ void putCh(char c){
  * =====================================================================================
  */
 char getCh(){
-	while(!(HWREG(UART0_LSR) & (1<<0)));
+	while(!(HWREG(UART0_BASE+UART_LSR) & (1<<0)));
 
-	return(HWREG(UART0_RHR));
+	return(HWREG(UART0_BASE+UART_RHR));
 }
 
 /* 
@@ -321,10 +321,10 @@ void failStrikePrint(unsigned int gpio,pinNum pins[],int n,int score){
     putString("--------------------------  Your Final Score is: ",49);
     
     int aux = (score/10);
-    putCH(aux+'0');
+    putCh(aux+'0');
 
     aux = (score%10);
-    putCH(aux+'0');
+    putCh(aux+'0');
     putString("  --------------------------\n\r\n\r\n\r",34);
     putString("----------------------  PRESS THE BUTTON 1 FOR CONTINUE OR BUTTON 2 FOR END THE GAME  ----------------------\n\r",110);
     
@@ -364,10 +364,10 @@ void successStrikePrint(unsigned int gpio,pinNum buzzer,int score){
     putString("--------------------------  Your Score is now: ",47);
     
     int aux = (score/10);
-    putCH(aux+'0');
+    putCh(aux+'0');
 
     aux = (score%10);
-    putCH(aux+'0');
+    putCh(aux+'0');
     putString("  --------------------------\n\r\n\r\n\r",34);
     
     ledON(SOC_GPIO_1_REGS,buzzer);
@@ -391,10 +391,10 @@ void winStrikePrint(unsigned int gpio,pinNum pins[], int n, pinNum buzzer, unsig
     putString("--------------------------  Your Final Score is: ",49);
     
     int aux = (score/10);
-    putCH(aux+'0');
+    putCh(aux+'0');
 
     aux = (score%10);
-    putCH(aux+'0');
+    putCh(aux+'0');
     putString("  --------------------------\n\r\n\r\n\r",34);
     
     

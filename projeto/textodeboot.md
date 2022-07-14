@@ -1,12 +1,19 @@
 # Boot da beagle bone black
 
+
+
 ## Código de boot padrão
 
     setenv app "mw 0x44e35048 0xaaaa; sleep 1; mw 0x44e35048 0x5555;setenv ipaddr 10.4.1.2; setenv serverip 10.4.1.1; tftp 0x80000000 /tftpboot/download.bin; echo "***Booting to BareMetal ***";go 0x80000000;"
 
+
+
+
+
+
 ## Settar o ambiente de de envio de dados
 
-    setenv autoload no;setenv ipaddr 10.4.1.2; setenv serverip 10.4.1.1;
+    mw 0x44e35048 0xaaaa; sleep 1; mw 0x44e35048; setenv autoload no;setenv ipaddr 10.4.1.2; setenv serverip 10.4.1.1;
 
 ## Enviar arquivo para a placa
 
@@ -15,6 +22,12 @@
 ## Bootar a placa
 
     echo "***Booting to BareMetal ***";go 0x80000000
+
+
+
+
+
+
 
 ## Código inteiro de boot com Watchdog e pelo cabo de rede
 

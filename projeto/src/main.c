@@ -168,7 +168,7 @@ void ISR_Handler(void){
 	}
     
 	/* Reconhece a IRQ */
-	HWREG(INTC_CONTROL) = 0x1;
+	HWREG(INTC_BASE+INTC_CONTROL) = 0x1;
 }
 
 

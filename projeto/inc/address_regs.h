@@ -13,7 +13,6 @@ extern "C" {
 #define SOC_DMTIMER_7_REGS									(0x4804A000)
 #define SOC_CONTROL_REGS									(0x44E10000)
 #define SOC_CM_PER_REGS										(0x44E00000)
-#define INTC_BASE											(0x48200000)
 
 /*                       GPIO register offsets                        */
 #define CM_PER_GPIO1							            (0x000000AC)
@@ -56,9 +55,11 @@ extern "C" {
 #define DMTIMER_TWPS										(0x00000048)
 
 /*                    Interrupt registers offsets                     */
+#define INTC_BASE											(0x48200000)
 #define INTC_MIR_CLEAR1										(0x000000A8)
 #define INTC_MIR_CLEAR2										(0x000000C8)
 #define INTC_MIR_CLEAR3										(0x000000E8)
+#define INTC_CONTROL    						            (0x00000048)
 #define INTC_SIR_IRQ    						            (0x00000040)
 
 /*                    	  Interrupt acronyns		                  */
@@ -73,6 +74,7 @@ extern "C" {
 #define WDT_WSPR											(0x00000048)
 
 /*                       UART registers offsets                       */
+#define UART0_BASE 								            (0x44E09000)
 #define UART_RHR											(0x00000000)
 #define UART_THR											(0x00000000)
 #define UART_LSR											(0x00000014)
