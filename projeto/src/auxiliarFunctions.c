@@ -288,13 +288,6 @@ void delay(unsigned int mSec){
     }
 #endif
 }
-
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  timerIrqHandler
- *  Description:  
- * =====================================================================================
- */
 void timerIrqHandler(void){
 
     /* Clear the status of the interrupt flags */
@@ -307,35 +300,122 @@ void timerIrqHandler(void){
 
 }
 
-void failStrike(unsigned int gpio,pinNum pin){
-    ledON(SOC_GPIO_1_REGS,pin);
-    delay(500);
-    ledOFF(SOC_GPIO_1_REGS,pin);
-    ledON(SOC_GPIO_1_REGS,pin);
-    delay(500);
-    ledOFF(SOC_GPIO_1_REGS,pin);
-    ledON(SOC_GPIO_1_REGS,pin);
-    delay(500);
-    ledOFF(SOC_GPIO_1_REGS,pin);
+void clearScreen()
+{
+  char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
+  putString(CLEAR_SCREEN_ANSI,12);
 }
 
-void successStrike(unsigned int gpio,pinNum pin){
-    ledON(SOC_GPIO_1_REGS,pin);
+void failStrikePrint(unsigned int gpio,pinNum pins[],int n,int score){
+    
+    clearScreen();
+    putString("\n\r\n\r\n\r",6);
+    putString("  _______                             _________          ______                 _________   ________     |     \n\r",119);
+    putString(" /       \\       ^      |\\        /| |                  /      \\  \\          / |           |        \\    |     \n\r",119);
+    putString(" |       |      / \\     | \\      / | |                 |        |  \\        /  |           |         |   |     \n\r",119);
+    putString(" |             /   \\    |  \\    /  | |_________        |        |   \\      /   |_________  |________/    |     \n\r",119);
+    putString(" |    _____   /_____\\   |   \\  /   | |                 |        |    \\    /    |           |      \\      |     \n\r",119);
+    putString(" |       |   /       \\  |    \\/    | |                 |        |     \\  /     |           |       \\           \n\r",119);
+    putString(" \\_______/  /         \\ |          | |_________         \\______/       \\/      |_________  |        \\    o     \n\r",119);
+    putString("\n\r\n\r\n\r",6);
+    putString("--------------------------  Your Final Score is: ",49);
+    
+    int aux = (score/10);
+    putCH(aux+'0');
+
+    aux = (score%10);
+    putCH(aux+'0');
+    putString("  --------------------------\n\r\n\r\n\r",34);
+    putString("----------------------  PRESS THE BUTTON 1 FOR CONTINUE OR BUTTON 2 FOR END THE GAME  ----------------------\n\r",110);
+    
+    ledON(SOC_GPIO_1_REGS,pins[0]);
+    ledON(SOC_GPIO_1_REGS,pins[n-1]);
+}
+
+
+
+
+void gameStartPrint(){
+    clearScreen();
+    putString("                ___________      ___________             _________                     ______                _________  \n\r",122);
+    putString(" |        |  o       |                |      |        | |               |\\        /|  /      \\  |           |           \n\r",122);
+    putString(" |        |          |                |      |        | |               | \\      / | |        | |           |           \n\r",122);
+    putString(" |________|  |       |                |      |________| |_________      |  \\    /  | |        | |           |_________  \n\r",122);
+    putString(" |        |  |       |                |      |        | |               |   \\  /   | |        | |           |           \n\r",122);
+    putString(" |        |  |       |                |      |        | |               |    \\/    | |        | |           |           \n\r",122);
+    putString(" |        |  |       |                |      |        | |_________      |          |  \\______/  |__________ |_________  \n\r",122);
+}
+
+
+
+
+void successStrikePrint(unsigned int gpio,pinNum buzzer,int score){
+    clearScreen();
+    putString("  | | |   ______   ___________   ________                    _________  | | |  \n\r",81);
+    putString("  | | |  /      \\       |       |        \\    o   |      /  |           | | |  \n\r",81);
+    putString("  | | |  |              |       |         |       |    /    |           | | |  \n\r",81);
+    putString("  | | |  \\______        |       |________/    |   |  /      |_________  | | |  \n\r",81);
+    putString("  | | |         \\       |       |      \\      |   |  \\      |           | | |  \n\r",81);
+    putString("                |       |       |       \\     |   |    \\    |                  \n\r",81);
+    putString("  o o o   ______/       |       |        \\    |   |      \\  |_________  o o o  \n\r",81);
+
+    putString("\n\r\n\r\n\r",6);
+
+    putString("--------------------------  Your Score is now: ",47);
+    
+    int aux = (score/10);
+    putCH(aux+'0');
+
+    aux = (score%10);
+    putCH(aux+'0');
+    putString("  --------------------------\n\r\n\r\n\r",34);
+    
+    ledON(SOC_GPIO_1_REGS,buzzer);
     delay(100);
-    ledOFF(SOC_GPIO_1_REGS,pin);   
+    ledOFF(SOC_GPIO_1_REGS,buzzer);   
 }
 
-void winStrike(unsigned int gpio,pinNum pins[], int n, pinNum buzzer, unsigned int TIME){
+void winStrikePrint(unsigned int gpio,pinNum pins[], int n, pinNum buzzer, unsigned int TIME,int score){
+    clearScreen();
+
+    putString("  | | | | | |                  ______                                                              | | | | | |   \n\r",115);
+    putString("  | | | | | |   \\         /   /      \\  |          |        \\                  /  o |\\          |  | | | | | |   \n\r",115);
+    putString("  | | | | | |     \\     /    |        | |          |         \\                /     |  \\        |  | | | | | |   \n\r",115);
+    putString("  | | | | | |       \\ /      |        | |          |          \\      /\\      /    | |    \\      |  | | | | | |   \n\r",115);
+    putString("  | | | | | |        |       |        | |          |           \\    /  \\    /     | |      \\    |  | | | | | |   \n\r",115);
+    putString("                     |       |        | |          |            \\  /    \\  /      | |        \\  |                \n\r",115);
+    putString("  o o o o o o        |        \\______/   \\________/              \\/      \\/       | |          \\|  o o o o o o   \n\r",115);
+    
+    
+    putString("\n\r\n\r\n\r",6);
+    putString("--------------------------  Your Final Score is: ",49);
+    
+    int aux = (score/10);
+    putCH(aux+'0');
+
+    aux = (score%10);
+    putCH(aux+'0');
+    putString("  --------------------------\n\r\n\r\n\r",34);
+    
+    
+    
     ledON(gpio,buzzer);
     allBlink(gpio,pins,n,TIME/4);
     ledOFF(gpio,buzzer);
+
     ledON(gpio,buzzer);
     allBlink(gpio,pins,n,TIME/4);
     ledOFF(gpio,buzzer);
+    
     ledON(gpio,buzzer);
     allBlink(gpio,pins,n,TIME/4);
     ledOFF(gpio,buzzer);
+    
     ledON(gpio,buzzer);
     allBlink(gpio,pins,n,TIME/4);
     ledOFF(gpio,buzzer);
+
+    putString("----------------------  PRESS THE BUTTON 1 FOR CONTINUE OR BUTTON 2 FOR END THE GAME  ----------------------\n\r",110);
+    ledON(SOC_GPIO_1_REGS,pins[0]);
+    ledON(SOC_GPIO_1_REGS,pins[n-1]);
 }

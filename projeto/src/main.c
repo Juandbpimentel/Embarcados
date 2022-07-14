@@ -4,6 +4,7 @@
 
 int timeVar = 1000;
 int score =   0;
+bool running = true;
 
 static molePosition actualPositionMole = role1;
 
@@ -74,133 +75,65 @@ void ledConfig ( ){
 
 }/* -----  end of function ledConfig  ----- */
 
+void strikeChecker(unsigned int gpio, unsigned int irqStatus, pinNum pin, molePosition role){
+	if (actualPositionMole == -1 && role == role1){
+		actualPositionMole = 1;//substituir por rand()%4 +1
+		gameStartPrint();
+		HWREG(gpio+irqStatus) |= 1<<pin;
+		return;
+	}
+
+	if (actualPositionMole == -1 && role == role4){
+		running = false;
+		HWREG(gpio+irqStatus) |= 1<<pin;
+		return;
+	}
+
+	if (actualPositionMole == role){
+		score++;
+		if(score == 70){
+			pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
+			winStrikePrint(gpio,ledPins,4,PIN8,1000,score);
+			TIME = 1000;
+			score = 0;
+			HWREG(gpio+irqStatus) |= 1<<pin;
+			return;
+		}
+
+		successStrikePrint(gpio,PIN8,score);
+		if (TIME>700){
+			TIME -= 30;
+		}else if(TIME>250){
+			TIME -= 15;
+		}else{
+			TIME -= 5;
+		}
+		
+	}else{
+		pinNum ledPins[] = {PIN2,PIN7};
+		failStrikePrint(gpio,ledPins,2,score);
+		TIME = 1000;
+		score = 0;
+		actualPositionMole = -1;
+	}
+	HWREG(gpio+irqStatus) |= 1<<pin;
+}
+
 void gpioIsrHandler(int btn){
 
     /* Clear the status of the interrupt flags */
 	switch(btn){
 		case 1:
-			if (actualPositionMole == role1){
-				score++;
-				if(score == 70){
-					pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
-					winStrike(SOC_GPIO_1_REGS,ledPins,4,PIN8,1000);
-					TIME = 1000;
-					score = 0;
-					HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_0) |= 1<<16;
-					return;
-				}
-
-				successStrike(SOC_GPIO_1_REGS,PIN8);
-				if (TIME>700){
-					TIME -= 30;
-				}else if(TIME>250){
-					TIME -= 15;
-				}else{
-					TIME -= 5;
-				}
-				
-			}else{
-				failStrike(SOC_GPIO_1_REGS,PIN8);
-				TIME = 1000;
-				score = 0;
-				HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_0) |= 1<<16;
-				return;
-			}
-			
-			HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_0) |= 1<<16;
+			strikeChecker(SOC_GPIO_1_REGS,GPIO_IRQSTATUS_0,16,role1);
 			break;
 		case 2:
-			if (actualPositionMole == role2){
-				score++;
-				if(score == 70){
-					pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
-					winStrike(SOC_GPIO_1_REGS,ledPins,4,PIN8,1000);
-					TIME = 1000;
-					score = 0;
-					HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_1) |= 1<<28;
-					return;
-				}
-
-				successStrike(SOC_GPIO_1_REGS,PIN8);
-				if (TIME>700){
-					TIME -= 30;
-				}else if(TIME>250){
-					TIME -= 15;
-				}else{
-					TIME -= 5;
-				}
-				
-			}else{
-				failStrike(SOC_GPIO_1_REGS,PIN8);
-				TIME = 1000;
-				score = 0;
-				HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_1) |= 1<<28;
-				return;
-			}
-			
-			HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_1) |= 1<<28;
+			strikeChecker(SOC_GPIO_1_REGS,GPIO_IRQSTATUS_1,28,role2);
 			break;
 		case 3:
-			if (actualPositionMole == role3){
-				score++;
-				if(score == 70){
-					pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
-					winStrike(SOC_GPIO_1_REGS,ledPins,4,PIN8,1000);
-					TIME = 1000;
-					score = 0;
-					HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_0) |= 1<<22;
-					return;
-				}
-
-				successStrike(SOC_GPIO_1_REGS,PIN8);
-				if (TIME>700){
-					TIME -= 30;
-				}else if(TIME>250){
-					TIME -= 15;
-				}else{
-					TIME -= 5;
-				}
-				
-			}else{
-				failStrike(SOC_GPIO_1_REGS,PIN8);
-				TIME = 1000;
-				score = 0;
-				HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_0) |= 1<<22;
-				return;
-			}
-			
-			HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_0) |= 1<<22;
+			strikeChecker(SOC_GPIO_2_REGS,GPIO_IRQSTATUS_0,22,role3);
 			break;
 		case 4:
-			if (actualPositionMole == role4){
-				score++;
-				if(score == 70){
-					pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
-					winStrike(SOC_GPIO_1_REGS,ledPins,4,PIN8,1000);
-					TIME = 1000;
-					score = 0;
-					HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_1) |= 1<<24;
-					return;
-				}
-
-				successStrike(SOC_GPIO_1_REGS,PIN8);
-				if (TIME>700){
-					TIME -= 30;
-				}else if(TIME>250){
-					TIME -= 15;
-				}else{
-					TIME -= 5;
-				}
-				
-			}else{
-				failStrike(SOC_GPIO_1_REGS,PIN8);
-				TIME = 1000;
-				score = 0;
-				HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_1) |= 1<<24;
-				return;
-			}
-			
-			HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_1) |= 1<<24;
+			strikeChecker(SOC_GPIO_2_REGS,GPIO_IRQSTATUS_1,24,role4);
 			break;
 	}
 
@@ -250,11 +183,34 @@ int main(void){
 
 	internBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
 	internBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
-
-	while(true){
-		//actualPositionMole = (rand()%4)+1;
-		//putCh(actualPositionMole+'0');
-		//putString(" - Actual position\n\r",20);
+	
+	gameStartPrint();
+	
+	while(running){
+		actualPositionMole = 1; // substituir por rand()%4+1 
+		setLedsOFF(SOC_GPIO_1_REGS,ledPins,4);
+		switch (actualPositionMole)
+		{
+			case role1:
+				ledON(SOC_GPIO_1_REGS,ledPins[0]);
+				break;
+			
+			case role2:
+				ledON(SOC_GPIO_1_REGS,ledPins[1]);
+				break;
+			
+			case role3:
+				ledON(SOC_GPIO_1_REGS,ledPins[2]);
+				break;
+			
+			case role4:
+				ledON(SOC_GPIO_1_REGS,ledPins[3]);
+				break;
+			
+			default:
+				break;
+		}
+		delay(TIME);
 	}
 
 	return(0);

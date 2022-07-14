@@ -31,6 +31,7 @@
     void ledON(unsigned int gpio,pinNum pin);
     void ledOFF(unsigned int gpio,pinNum pin);
     int readButton(unsigned int gpio,btnPinNum pin);
+    void clearScreen();
 
 //blinks functions
     void intercalatedBlink(unsigned int gpio,pinNum pin[], int n, unsigned int TIME);
@@ -47,8 +48,9 @@
 
 //interruption auxiliar functions
     #define INT_CONFIG_BIT(irq_num)					(1<<(irq_num & 0x1F))
-    void failStrike(unsigned int gpio,pinNum pin);
-    void successStrike(unsigned int gpio,pinNum pin);
-    void winStrike(unsigned int gpio,pinNum pins[], int n, pinNum buzzer, unsigned int TIME);
+    void failStrikePrint(unsigned int gpio,pinNum pin[],int n,int score);
+    void gameStartPrint();
+    void successStrikePrint(unsigned int gpio,pinNum buzzer,int score);
+    void winStrikePrint(unsigned int gpio,pinNum pins[], int n, pinNum buzzer, unsigned int TIME,int score);
 
 #endif // 	__AUXILIAR_FUNCTIONS_H

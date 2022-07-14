@@ -1,15 +1,11 @@
 make.exe --dry-run --always-make --keep-going --print-directory
 make: Entering directory 'd:/Github/Embarcados/projeto'
 arm-none-eabi-as -mfpu=neon src/start.s -o obj/start.o
- 
 arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ -c src/timers.c -o obj/timers.o
- 
 arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ -c src/auxiliarFunctions.c -o obj/auxiliarFunctions.o
- 
 arm-none-eabi-gcc -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8 -Iinc/ -c src/main.c -o obj/main.o
 arm-none-eabi-ld  -Iinc/ obj/start.o obj/main.o obj/auxiliarFunctions.o obj/timers.o -T src/memmap.ld -o obj/main.elf
 arm-none-eabi-objcopy obj/main.elf bin/spl.boot -O binary
- 
 cp bin/spl.boot /tftpboot/app
 make: Leaving directory 'd:/Github/Embarcados/projeto'
  
