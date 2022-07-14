@@ -1,12 +1,19 @@
 #include "auxiliarFunctions.h"
 
-#define TIME timeVar
+#define TIME (timeVar)
+#define SEED (0xF012CCA5)
 
 int timeVar = 1000;
-int score =   0;
 bool running = true;
+unsigned int score = 0;
+unsigned int countRand = 0;
 
 static molePosition actualPositionMole = role1;
+
+unsigned int randNumGen(){
+	int pos = ((SEED >> 2) ^ (SEED >> 7) ^ (SEED >> 13) ^ (SEED >> 22) ) & countRand;
+	return (((SEED >> 1) | (pos >> 15)))%4;
+}
 
 void timerSetup(void){
 	HWREG(SOC_CM_PER_REGS + CM_PER_TIMER7_CLKCTRL) |= MODULEMODE_ENABLE;
@@ -15,8 +22,8 @@ void timerSetup(void){
 
 
 #if DELAY_USE_INTERRUPT
-    /* Interrupt mask */
-    HWREG(INTC_MIR_CLEAR2) |= (1<<31);//(95 --> Bit 31 do 3º registrador (MIR CLEAR2))
+	/* Interrupt mask */
+	HWREG(INTC_BASE + INTC_MIR_CLEAR2) |= INT_CONFIG_BIT(TINT7);
 #endif
 }
 
@@ -29,7 +36,6 @@ void gpioSetup(){
 
 	/* Interrupt mask */
 	HWREG(INTC_BASE + INTC_MIR_CLEAR3) |= INT_CONFIG_BIT(GPIO_INT_1_A) | INT_CONFIG_BIT(GPIO_INT_1_B);
-	HWREG(INTC_BASE + INTC_MIR_CLEAR2) |= INT_CONFIG_BIT(TINT7);
 	HWREG(INTC_BASE + INTC_MIR_CLEAR1) |= INT_CONFIG_BIT(GPIO_INT_2_A) | INT_CONFIG_BIT(GPIO_INT_2_B);
 }
 
@@ -77,7 +83,7 @@ void ledConfig ( ){
 
 void strikeChecker(unsigned int gpio, unsigned int irqStatus, pinNum pin, molePosition role){
 	if (actualPositionMole == -1 && role == role1){
-		actualPositionMole = 1;//substituir por rand()%4 +1
+		actualPositionMole = randNumGen(countRand + 7);
 		gameStartPrint();
 		HWREG(gpio+irqStatus) |= 1<<pin;
 		return;
@@ -101,12 +107,10 @@ void strikeChecker(unsigned int gpio, unsigned int irqStatus, pinNum pin, molePo
 		}
 
 		successStrikePrint(gpio,PIN8,score);
-		if (TIME>700){
-			TIME -= 30;
-		}else if(TIME>250){
-			TIME -= 15;
-		}else{
-			TIME -= 5;
+		switch(TIME){
+			case (700): TIME -= 35; break;
+			case (420): TIME -= 20; break;
+			default: :  TIME -= 50; break;
 		}
 		
 	}else{
@@ -116,6 +120,7 @@ void strikeChecker(unsigned int gpio, unsigned int irqStatus, pinNum pin, molePo
 		score = 0;
 		actualPositionMole = -1;
 	}
+	
 	HWREG(gpio+irqStatus) |= 1<<pin;
 }
 
@@ -144,7 +149,7 @@ void ISR_Handler(void){
 	/* Verifica se é interrupção do DMTIMER7 */
 	unsigned int irq_number = HWREG(INTC_BASE+INTC_SIR_IRQ) & 0x7f;
 	
-	if(irq_number == 95)
+	if(irq_number == TINT7)
 		timerIrqHandler();
 	
 	if(irq_number == GPIO_INT_1_A){
@@ -183,11 +188,12 @@ int main(void){
 
 	internBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
 	internBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
+	countRand = SEED << 21;
 	
 	gameStartPrint();
 	
 	while(running){
-		actualPositionMole = 1; // substituir por rand()%4+1 
+		actualPositionMole = randNumGen();
 		setLedsOFF(SOC_GPIO_1_REGS,ledPins,4);
 		switch (actualPositionMole)
 		{
@@ -211,11 +217,8 @@ int main(void){
 				break;
 		}
 		delay(TIME);
+		countRand += 19;
 	}
 
 	return(0);
 }
-
-
-
-
