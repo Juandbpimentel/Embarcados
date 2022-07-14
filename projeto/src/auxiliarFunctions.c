@@ -13,10 +13,10 @@
  */
 void disableWdt(void){
 	HWREG(WDT_WSPR) = 0xAAAA;
-	while((HWREG(WDT_WWPS) & (1<<4)));
+	while((HWREG(SOC_WDT_0_REGS + WDT_WWPS) & (1<<4)));
 	
 	HWREG(WDT_WSPR) = 0x5555;
-	while((HWREG(WDT_WWPS) & (1<<4)));
+	while((HWREG(SOC_WDT_0_REGS + WDT_WWPS) & (1<<4)));
 }
 
 
@@ -255,12 +255,12 @@ void delay(unsigned int mSec){
 	DMTimerWaitForWrite(0x2);
 
     /* Load the register with the re-load value */
-	HWREG(DMTIMER_TCRR) = countVal;
+	HWREG(SOC_DMTIMER_7_REGS + DMTIMER_TCRR) = countVal;
 	
 	flag_timers = false;
 
     /* Enable the DMTimer interrupts */
-	HWREG(DMTIMER_IRQENABLE_SET) = 0x2; 
+	HWREG(SOC_DMTIMER_7_REGS + DMTIMER_IRQENABLE_SET) = 0x2; 
 
     /* Start the DMTimer */
 	timerEnable();
@@ -268,21 +268,21 @@ void delay(unsigned int mSec){
     while(flag_timers == false);
 
     /* Disable the DMTimer interrupts */
-	HWREG(DMTIMER_IRQENABLE_CLR) = 0x2; 
+	HWREG(SOC_DMTIMER_7_REGS + DMTIMER_IRQENABLE_CLR) = 0x2; 
 #else
     while(mSec != 0){
         /* Wait for previous write to complete */
         DMTimerWaitForWrite(0x2);
 
         /* Set the counter value. */
-        HWREG(SOC_DMTIMER_7_REGS+DMTIMER_TCRR) = 0x0;
+        HWREG(SOC_DMTIMER_7_REGS + DMTIMER_TCRR) = 0x0;
 
         timerEnable();
 
-        while(HWREG(SOC_DMTIMER_7_REGS+DMTIMER_TCRR) < TIMER_1MS_COUNT);
+        while(HWREG(SOC_DMTIMER_7_REGS + DMTIMER_TCRR) < TIMER_1MS_COUNT);
 
         /* Stop the timer */
-        HWREG(SOC_DMTIMER_7_REGS+DMTIMER_TCLR) &= ~(0x00000001u);
+        HWREG(SOC_DMTIMER_7_REGS + DMTIMER_TCLR) &= ~(0x00000001u);
 
         mSec--;
     }
