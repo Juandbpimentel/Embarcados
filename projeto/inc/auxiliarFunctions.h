@@ -18,7 +18,7 @@
     }btnPinNum;
 
     typedef enum _molePosition{
-        role1=1,role2,role3,role4
+        role1=1,role2,role3,role4,roleStop
     }molePosition;
     /*                       Functionalities                            */
 
@@ -28,8 +28,8 @@
     char getCh();
     int putString(char *str, unsigned int length);
     int getString(char *buf, unsigned int length);
-    void ledON(unsigned int gpio,pinNum pin);
-    void ledOFF(unsigned int gpio,pinNum pin);
+    void pinON(unsigned int gpio,pinNum pin);
+    void pinOFF(unsigned int gpio,pinNum pin);
     int readButton(unsigned int gpio,btnPinNum pin);
     void clearScreen();
 
@@ -48,7 +48,7 @@
 
 //interruption auxiliar functions
     #define INT_CONFIG_BIT(irq_num)					(1<<(irq_num & 0x1F))
-    void failStrikePrint(unsigned int gpio,pinNum pin[],int n,int score);
+    void failStrikePrint(unsigned int gpio,pinNum pin[],int n,int score, pinNum buzzer);
     void gameStartPrint();
     void successStrikePrint(unsigned int gpio,pinNum buzzer,int score);
     void winStrikePrint(unsigned int gpio,pinNum pins[], int n, pinNum buzzer, unsigned int TIME,int score);

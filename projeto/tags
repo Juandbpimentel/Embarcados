@@ -76,8 +76,8 @@ flag_timer	src/main.c	/^int flag_timer = false;$/;"	v
 getCh	src/main.c	/^char getCh(){$/;"	f
 getString	src/main.c	/^int getString(char *buf, unsigned int length){$/;"	f	signature:(char *buf, unsigned int length)
 gpioSetup	src/main.c	/^void gpioSetup(){$/;"	f
-ledOff	src/main.c	/^void ledOff(void){$/;"	f	signature:(void)
-ledOn	src/main.c	/^void ledOn(void){$/;"	f	signature:(void)
+pinOFF	src/main.c	/^void pinOFF(void){$/;"	f	signature:(void)
+pinON	src/main.c	/^void pinON(void){$/;"	f	signature:(void)
 main	src/main.c	/^int main(void){$/;"	f	signature:(void)
 putCh	src/main.c	/^void putCh(char c){$/;"	f	signature:(char c)
 putString	src/main.c	/^int putString(char *str, unsigned int length){$/;"	f	signature:(char *str, unsigned int length)

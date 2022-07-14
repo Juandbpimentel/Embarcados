@@ -75,23 +75,23 @@ void intercalatedBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME
 {
     TIME /= 2;
     // leds on
-    ////ledON(pinAD15);
-    ledON(gpio,pins[0]);
-    ledON(gpio,pins[2]);
+    ////pinON(pinAD15);
+    pinON(gpio,pins[0]);
+    pinON(gpio,pins[2]);
     delay(TIME);
-    ////ledOFF(pinAD15);
-    ledON(gpio,pins[1]);
-    ledON(gpio,pins[3]);
+    ////pinOFF(pinAD15);
+    pinON(gpio,pins[1]);
+    pinON(gpio,pins[3]);
     delay(TIME);
 
     // leds off
-    ////ledOFF(pinAD15);
-    ledOFF(gpio,pins[0]);
-    ledOFF(gpio,pins[2]);
+    ////pinOFF(pinAD15);
+    pinOFF(gpio,pins[0]);
+    pinOFF(gpio,pins[2]);
     delay(TIME);
-    ////ledOFF(pinAD15);
-    ledOFF(gpio,pins[1]);
-    ledOFF(gpio,pins[3]);
+    ////pinOFF(pinAD15);
+    pinOFF(gpio,pins[1]);
+    pinOFF(gpio,pins[3]);
     delay(TIME);
     // led(GPIO1,pinExtern);
 }
@@ -99,57 +99,54 @@ void sequentialBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
     TIME /= 4;
     // leds on
-    // ledON(pinAD15);
-    ledON(gpio,pins[0]);
+    // pinON(pinAD15);
+    pinON(gpio,pins[0]);
     delay(TIME);
 
-    // ledOFF(pinAD15);
-    ledON(gpio,pins[1]);
+    // pinOFF(pinAD15);
+    pinON(gpio,pins[1]);
     delay(TIME);
 
-    // ledON(pinAD15);
-    ledON(gpio,pins[2]);
+    // pinON(pinAD15);
+    pinON(gpio,pins[2]);
     delay(TIME);
 
-    // ledOFF(pinAD15);
-    ledON(gpio,pins[3]);
+    // pinOFF(pinAD15);
+    pinON(gpio,pins[3]);
     delay(TIME);
 
     // leds off
-    // ledON(pinAD15);
-    ledOFF(gpio,pins[3]);
+    // pinON(pinAD15);
+    pinOFF(gpio,pins[3]);
     delay(TIME);
 
-    // ledOFF(pinAD15);
-    ledOFF(gpio,pins[2]);
+    // pinOFF(pinAD15);
+    pinOFF(gpio,pins[2]);
     delay(TIME);
 
-    // ledON(pinAD15);
-    ledOFF(gpio,pins[1]);
+    // pinON(pinAD15);
+    pinOFF(gpio,pins[1]);
     delay(TIME);
 
-    // ledOFF(pinAD15);
-    ledOFF(gpio,pins[0]);
+    // pinOFF(pinAD15);
+    pinOFF(gpio,pins[0]);
     delay(TIME);
     // led(GPIO1,pinExtern);
 }
 void allBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
-    // led(GPIO1,pinExtern);
-    // delay();
-    // ledON(pinAD15);
     for (int i = 0; i < n; i++)
     {
-        ledON(gpio,pins[i]);
+        pinON(gpio,pins[i]);
     }
 
     delay(TIME);
 
     for (int i = n - 1; i >= 0; i--)
     {
-        ledOFF(gpio,pins[i]);
+        pinOFF(gpio,pins[i]);
     }
-    // ledOFF(pinAD15);
+    // pinOFF(pinAD15);
     delay(TIME);
     // led(GPIO1,pinExtern);
 }
@@ -168,13 +165,13 @@ unsigned int readBut (unsigned int gpio,btnPinNum pin){
 }/* -----  end of function readBut  ----- */
 
 
-void ledOFF(unsigned int gpio,pinNum pin){
+void pinOFF(unsigned int gpio,pinNum pin){
 	HWREG(gpio+GPIO_DATAOUT) &= ~(1<<pin);
 
 }
 
 
-void ledON(unsigned int gpio,pinNum pin){
+void pinON(unsigned int gpio,pinNum pin){
 
     HWREG(gpio+GPIO_DATAOUT) |= (1<<pin);
 
@@ -183,33 +180,33 @@ void ledON(unsigned int gpio,pinNum pin){
 void farEndBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
     TIME /= 2;
-    ledON(gpio,pins[0]);
-    ledON(gpio,pins[3]);
+    pinON(gpio,pins[0]);
+    pinON(gpio,pins[3]);
     delay(TIME);
-    ledOFF(gpio,pins[0]);
-    ledOFF(gpio,pins[3]);
+    pinOFF(gpio,pins[0]);
+    pinOFF(gpio,pins[3]);
     delay(TIME);
-    ledON(gpio,pins[0]);
-    ledON(gpio,pins[3]);
+    pinON(gpio,pins[0]);
+    pinON(gpio,pins[3]);
     delay(TIME);
-    ledOFF(gpio,pins[0]);
-    ledOFF(gpio,pins[3]);
+    pinOFF(gpio,pins[0]);
+    pinOFF(gpio,pins[3]);
     delay(TIME);
 }
 
 void internBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
-    ledON(gpio,pins[1]);
-    ledON(gpio,pins[2]);
+    pinON(gpio,pins[1]);
+    pinON(gpio,pins[2]);
     delay(TIME);
-    ledOFF(gpio,pins[1]);
-    ledOFF(gpio,pins[2]);
+    pinOFF(gpio,pins[1]);
+    pinOFF(gpio,pins[2]);
     delay(TIME);
-    ledON(gpio,pins[1]);
-    ledON(gpio,pins[2]);
+    pinON(gpio,pins[1]);
+    pinON(gpio,pins[2]);
     delay(TIME);
-    ledOFF(gpio,pins[1]);
-    ledOFF(gpio,pins[2]);
+    pinOFF(gpio,pins[1]);
+    pinOFF(gpio,pins[2]);
     delay(TIME);
 }
 
@@ -217,27 +214,27 @@ void goOnGoOutBlink(unsigned int gpio,pinNum pins[], int n, unsigned int TIME)
 {
     for (int i = 0; i < n; i++){
         delay(TIME);
-        ledON(gpio,pins[i]);
+        pinON(gpio,pins[i]);
     }
     for (int i = 0; i < n; i++){
         delay(TIME);
-        ledOFF(gpio,pins[i]);
+        pinOFF(gpio,pins[i]);
     }
     for (int i = n - 1; i >= 0; i--)
     {
         delay(TIME);
-        ledON(gpio,pins[i]);
+        pinON(gpio,pins[i]);
     }
     for (int i = n - 1; i >= 0; i--)
     {
         delay(TIME);
-        ledOFF(gpio,pins[i]);
+        pinOFF(gpio,pins[i]);
     }
 }
 
 void setLedsOFF(unsigned int gpio,pinNum pins[], int n){
     for (int i = 0; i < n; i++){
-		ledOFF(gpio,pins[i]);
+		pinOFF(gpio,pins[i]);
 	}
 }
 
@@ -306,18 +303,21 @@ void clearScreen()
   putString(CLEAR_SCREEN_ANSI,12);
 }
 
-void failStrikePrint(unsigned int gpio,pinNum pins[],int n,int score){
+void failStrikePrint(unsigned int gpio,pinNum pins[],int n,int score, pinNum buzzer){
     
     clearScreen();
     putString("\n\r\n\r\n\r",6);
-    putString("  _______                             _________          ______                 _________   ________     |     \n\r",119);
-    putString(" /       \\       ^      |\\        /| |                  /      \\  \\          / |           |        \\    |     \n\r",119);
-    putString(" |       |      / \\     | \\      / | |                 |        |  \\        /  |           |         |   |     \n\r",119);
-    putString(" |             /   \\    |  \\    /  | |_________        |        |   \\      /   |_________  |________/    |     \n\r",119);
-    putString(" |    _____   /_____\\   |   \\  /   | |                 |        |    \\    /    |           |      \\      |     \n\r",119);
-    putString(" |       |   /       \\  |    \\/    | |                 |        |     \\  /     |           |       \\           \n\r",119);
-    putString(" \\_______/  /         \\ |          | |_________         \\______/       \\/      |_________  |        \\    o     \n\r",119);
+    putString("  _______                             _________              ______                 _________   ________     |     \n\r",119);
+    putString(" /       \\       ^      |\\        /| |                      /      \\  \\          / |           |        \\    |     \n\r",119);
+    putString(" |       |      / \\     | \\      / | |                     |        |  \\        /  |           |         |   |     \n\r",119);
+    putString(" |             /   \\    |  \\    /  | |_________            |        |   \\      /   |_________  |________/    |     \n\r",119);
+    putString(" |    _____   /_____\\   |   \\  /   | |                     |        |    \\    /    |           |      \\      |     \n\r",119);
+    putString(" |       |   /       \\  |    \\/    | |                     |        |     \\  /     |           |       \\           \n\r",119);
+    putString(" \\_______/  /         \\ |          | |_________             \\______/       \\/      |_________  |        \\    o     \n\r",119);
     putString("\n\r\n\r\n\r",6);
+    pinON(gpio,buzzer);
+    delay(1000);
+    pinOFF(gpio,buzzer);
     putString("--------------------------  Your Final Score is: ",49);
     
     int aux = (score/10);
@@ -326,10 +326,10 @@ void failStrikePrint(unsigned int gpio,pinNum pins[],int n,int score){
     aux = (score%10);
     putCh(aux+'0');
     putString("  --------------------------\n\r\n\r\n\r",34);
-    putString("----------------------  PRESS THE BUTTON 1 FOR CONTINUE OR BUTTON 2 FOR END THE GAME  ----------------------\n\r",110);
-    
-    ledON(SOC_GPIO_1_REGS,pins[0]);
-    ledON(SOC_GPIO_1_REGS,pins[n-1]);
+    putString("\n\r\n\r\n\r",6);
+    putString("\n\r\n\r\n\r",6);
+    putString("----------------------  PRESS THE BUTTON 1 FOR CONTINUE  ----------------------\n\r",81);
+    pinON(SOC_GPIO_1_REGS,pins[0]);
 }
 
 
@@ -337,13 +337,18 @@ void failStrikePrint(unsigned int gpio,pinNum pins[],int n,int score){
 
 void gameStartPrint(){
     clearScreen();
-    putString("                ___________      ___________             _________                     ______                _________  \n\r",122);
-    putString(" |        |  o       |                |      |        | |               |\\        /|  /      \\  |           |           \n\r",122);
-    putString(" |        |          |                |      |        | |               | \\      / | |        | |           |           \n\r",122);
-    putString(" |________|  |       |                |      |________| |_________      |  \\    /  | |        | |           |_________  \n\r",122);
-    putString(" |        |  |       |                |      |        | |               |   \\  /   | |        | |           |           \n\r",122);
-    putString(" |        |  |       |                |      |        | |               |    \\/    | |        | |           |           \n\r",122);
-    putString(" |        |  |       |                |      |        | |_________      |          |  \\______/  |__________ |_________  \n\r",122);
+    
+    putString("\n\r\n\r\n\r",6);
+    
+    putString("                  ___________   \n\r",34);
+    putString("   |        |  o       |        \n\r",34);
+    putString("   |        |          |        \n\r",34);
+    putString("   |________|  |       |        \n\r",34);
+    putString("   |        |  |       |        \n\r",34);
+    putString("   |        |  |       |        \n\r",34);
+    putString("   |        |  |       |        \n\r",34);
+    
+    putString("\n\r\n\r\n\r",6);
 }
 
 
@@ -351,6 +356,9 @@ void gameStartPrint(){
 
 void successStrikePrint(unsigned int gpio,pinNum buzzer,int score){
     clearScreen();
+
+    putString("\n\r\n\r\n\r",6);
+
     putString("  | | |   ______   ___________   ________                    _________  | | |  \n\r",81);
     putString("  | | |  /      \\       |       |        \\    o   |      /  |           | | |  \n\r",81);
     putString("  | | |  |              |       |         |       |    /    |           | | |  \n\r",81);
@@ -370,21 +378,22 @@ void successStrikePrint(unsigned int gpio,pinNum buzzer,int score){
     putCh(aux+'0');
     putString("  --------------------------\n\r\n\r\n\r",34);
     
-    ledON(SOC_GPIO_1_REGS,buzzer);
+    pinON(SOC_GPIO_1_REGS,buzzer);
     delay(100);
-    ledOFF(SOC_GPIO_1_REGS,buzzer);   
+    pinOFF(SOC_GPIO_1_REGS,buzzer);   
 }
 
 void winStrikePrint(unsigned int gpio,pinNum pins[], int n, pinNum buzzer, unsigned int TIME,int score){
     clearScreen();
+    putString("\n\r\n\r\n\r",6);
 
-    putString("  | | | | | |                  ______                                                              | | | | | |   \n\r",115);
-    putString("  | | | | | |   \\         /   /      \\  |          |        \\                  /  o |\\          |  | | | | | |   \n\r",115);
-    putString("  | | | | | |     \\     /    |        | |          |         \\                /     |  \\        |  | | | | | |   \n\r",115);
-    putString("  | | | | | |       \\ /      |        | |          |          \\      /\\      /    | |    \\      |  | | | | | |   \n\r",115);
-    putString("  | | | | | |        |       |        | |          |           \\    /  \\    /     | |      \\    |  | | | | | |   \n\r",115);
-    putString("                     |       |        | |          |            \\  /    \\  /      | |        \\  |                \n\r",115);
-    putString("  o o o o o o        |        \\______/   \\________/              \\/      \\/       | |          \\|  o o o o o o   \n\r",115);
+    putString("  | | | | | |                                        | | | | | |   \n\r",69);
+    putString("  | | | | | | \\                  /  o |\\          |  | | | | | |   \n\r",69);
+    putString("  | | | | | |  \\                /     |  \\        |  | | | | | |   \n\r",69);
+    putString("  | | | | | |   \\      /\\      /    | |    \\      |  | | | | | |   \n\r",69);
+    putString("  | | | | | |    \\    /  \\    /     | |      \\    |  | | | | | |   \n\r",69);
+    putString("                  \\  /    \\  /      | |        \\  |                \n\r",69);
+    putString("  o o o o o o      \\/      \\/       | |         \\ |  o o o o o o   \n\r",69);
     
     
     putString("\n\r\n\r\n\r",6);
@@ -395,27 +404,30 @@ void winStrikePrint(unsigned int gpio,pinNum pins[], int n, pinNum buzzer, unsig
 
     aux = (score%10);
     putCh(aux+'0');
+
     putString("  --------------------------\n\r\n\r\n\r",34);
     
     
     
-    ledON(gpio,buzzer);
-    allBlink(gpio,pins,n,TIME/4);
-    ledOFF(gpio,buzzer);
+    pinON(gpio,buzzer);
+    allBlink(gpio,pins,n,TIME);
+    pinOFF(gpio,buzzer);
 
-    ledON(gpio,buzzer);
-    allBlink(gpio,pins,n,TIME/4);
-    ledOFF(gpio,buzzer);
+    pinON(gpio,buzzer);
+    allBlink(gpio,pins,n,TIME);
+    pinOFF(gpio,buzzer);
     
-    ledON(gpio,buzzer);
-    allBlink(gpio,pins,n,TIME/4);
-    ledOFF(gpio,buzzer);
+    pinON(gpio,buzzer);
+    allBlink(gpio,pins,n,TIME);
+    pinOFF(gpio,buzzer);
     
-    ledON(gpio,buzzer);
-    allBlink(gpio,pins,n,TIME/4);
-    ledOFF(gpio,buzzer);
+    pinON(gpio,buzzer);
+    allBlink(gpio,pins,n,TIME);
+    pinOFF(gpio,buzzer);
 
-    putString("----------------------  PRESS THE BUTTON 1 FOR CONTINUE OR BUTTON 2 FOR END THE GAME  ----------------------\n\r",110);
-    ledON(SOC_GPIO_1_REGS,pins[0]);
-    ledON(SOC_GPIO_1_REGS,pins[n-1]);
+    putString("\n\r\n\r\n\r",6);
+    putString("\n\r\n\r\n\r",6);
+    putString("\n\r\n\r\n\r",6);
+    putString("----------------------  PRESS THE BUTTON 1 FOR CONTINUE  ----------------------\n\r",81);
+    pinON(SOC_GPIO_1_REGS,pins[0]);
 }

@@ -37,7 +37,7 @@ extern "C" {
 #define CONF_LCD_VSYNC							            (0x000008E0)
 #define CONF_LCD_PCLK							            (0x000008E8)
 //buzzer gpio1
-#define CONF_GPMC_AD8								        (0x00000820) // EHRPWM2A
+#define CONF_GPMC_AD14								        (0x00000838) // EHRPWM2A
 //leds gpio1
 #define CONF_GPMC_AD2								        (0x00000808)
 #define CONF_GPMC_AD3								        (0x0000080C)
@@ -89,6 +89,14 @@ extern "C" {
 #define OPTFCLKEN_GPIO_GDBCLK_FCLK_EN						(0x00040000)
 
 /*                         Timer constants                            */
+
+#define CM_RTC_RTC_CLKCTRL                                  (0x00000800)
+#define CM_RTC_CLKSTCTRL                                    (0x00000804)
+
+#define RTC_BASE                                            (0x44E3E000)
+#define KICK0R                                              (0x0000006C)
+#define KICK1R                                              (0x00000070)
+#define SECONDS_REG                                         (0x00000000)
 #define TIMER_1MS_COUNT										(0x00005DC0)
 #define TIMER_OVERFLOW										(0xFFFFFFFF)
 

@@ -4,11 +4,18 @@
 #define SEED (0xF012CCA5)
 
 int timeVar = 1000;
-bool running = true;
-unsigned int score = 0;
-unsigned int countRand = 0;
+unsigned int score;
+unsigned int countRand, pos, nVetSeq = 63;
+const unsigned int vetSeq[] = {1,3,2,4,1,3,2,4,2,
+							3,1,3,2,4,1,3,2,4,
+							1,3,2,4,1,3,2,1,3,
+							2,4,1,3,2,4,2,3,1,
+							3,2,4,1,3,2,4,1,3,
+							2,4,1,3,2,4,1,3,2,
+							2,3,3,1,4,4,2,1,3}; 
 
-static molePosition actualPositionMole = role1;
+static int running = 1;
+static int actualPositionMole = role1;
 
 unsigned int randNumGen(){
 	int pos = ((SEED >> 2) ^ (SEED >> 7) ^ (SEED >> 13) ^ (SEED >> 22) ) & countRand;
@@ -71,54 +78,73 @@ void ledConfig ( ){
 	HWREG(SOC_CONTROL_REGS + CONF_GPMC_AD3) |= GPIO_FUNC;
 	HWREG(SOC_CONTROL_REGS + CONF_GPMC_AD6) |= GPIO_FUNC;
 	HWREG(SOC_CONTROL_REGS + CONF_GPMC_AD7) |= GPIO_FUNC;
-	HWREG(SOC_CONTROL_REGS + CONF_GPMC_AD8) |= GPIO_FUNC;
+	HWREG(SOC_CONTROL_REGS + CONF_GPMC_AD14) |= GPIO_FUNC;
 
 
 	/* clear pins 2, 3, 6 and 7 for output */
-	HWREG(SOC_GPIO_1_REGS + GPIO_OE) &= ~(1<<2) & ~(1<<3) & ~(1<<6) & ~(1<<7) & ~(1<<8);
+	HWREG(SOC_GPIO_1_REGS + GPIO_OE) &= ~(1<<2) & ~(1<<3) & ~(1<<6) & ~(1<<7) & ~(1<<14);
 	/* clear bit field that will be used */
-	HWREG(SOC_GPIO_1_REGS + GPIO_DATAOUT) &= ~(1<<2) & ~(1<<3) & ~(1<<6) & ~(1<<7) & ~(1<<8);
+	HWREG(SOC_GPIO_1_REGS + GPIO_DATAOUT) &= ~(1<<2) & ~(1<<3) & ~(1<<6) & ~(1<<7) & ~(1<<14);
 
 }/* -----  end of function ledConfig  ----- */
 
+void rtcSetup(){
+	HWREG(SOC_CM_PER_REGS+CM_RTC_CLKSTCTRL) = 0x2;	
+	HWREG(SOC_CM_PER_REGS+CM_RTC_RTC_CLKCTRL) = 0x2;
+	
+	HWREG(RTC_BASE+KICK0R) = 0x83E70B13;	
+	HWREG(RTC_BASE+KICK1R) = 0x95A4F1E0;
+
+	HWREG(RTC_BASE+0x054) = 0x48;
+
+	HWREG(RTC_BASE+0x40) = 0x1;
+
+
+		
+}
+
 void strikeChecker(unsigned int gpio, unsigned int irqStatus, pinNum pin, molePosition role){
-	if (actualPositionMole == -1 && role == role1){
-		actualPositionMole = randNumGen(countRand + 7);
+	if (actualPositionMole == roleStop && role == role1){
+		countRand += 7;
+		actualPositionMole = (countRand%4)+1;
 		gameStartPrint();
+		score = 0;
 		HWREG(gpio+irqStatus) |= 1<<pin;
 		return;
 	}
-
-	if (actualPositionMole == -1 && role == role4){
-		running = false;
+	
+	if (actualPositionMole == roleStop){
 		HWREG(gpio+irqStatus) |= 1<<pin;
 		return;
 	}
+	
 
-	if (actualPositionMole == role){
+	if (actualPositionMole == role){// success strike
 		score++;
-		if(score == 70){
+		if(score == 50){ // win
 			pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
-			winStrikePrint(gpio,ledPins,4,PIN8,1000,score);
+			setLedsOFF(SOC_GPIO_1_REGS,ledPins,4);
+			winStrikePrint(SOC_GPIO_1_REGS,ledPins,4,PIN14,500,score);
 			TIME = 1000;
-			score = 0;
+			actualPositionMole = roleStop;
 			HWREG(gpio+irqStatus) |= 1<<pin;
 			return;
 		}
 
-		successStrikePrint(gpio,PIN8,score);
-		switch(TIME){
-			case (700): TIME -= 35; break;
-			case (420): TIME -= 20; break;
-			default: :  TIME -= 50; break;
+		successStrikePrint(SOC_GPIO_1_REGS,PIN14,score);
+		if(TIME > 500){
+			TIME -= 25;
+		}else if(TIME > 250){
+			TIME -= 20;
+		}else if (TIME>200){
+			TIME -= 10;
 		}
-		
-	}else{
-		pinNum ledPins[] = {PIN2,PIN7};
-		failStrikePrint(gpio,ledPins,2,score);
+	}else{ // game over
+		pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
+		setLedsOFF(SOC_GPIO_1_REGS,ledPins,4);
+		failStrikePrint(SOC_GPIO_1_REGS,ledPins,2,score, PIN14);
 		TIME = 1000;
-		score = 0;
-		actualPositionMole = -1;
+		actualPositionMole = roleStop;
 	}
 	
 	HWREG(gpio+irqStatus) |= 1<<pin;
@@ -146,6 +172,7 @@ void gpioIsrHandler(int btn){
 
 
 void ISR_Handler(void){
+	//	pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
 	/* Verifica se é interrupção do DMTIMER7 */
 	unsigned int irq_number = HWREG(INTC_BASE+INTC_SIR_IRQ) & 0x7f;
 	
@@ -153,22 +180,22 @@ void ISR_Handler(void){
 		timerIrqHandler();
 	
 	if(irq_number == GPIO_INT_1_A){
-		putString("button 1 pressed!\n\r",19);
+		//putString("button 1 pressed!\n\r",19);
 		gpioIsrHandler(1);
 	}
 
 	if(irq_number == GPIO_INT_1_B){
-		putString("button 2 pressed!\n\r",19);
+		//putString("button 2 pressed!\n\r",19);
 		gpioIsrHandler(2);
 	}
 
 	if(irq_number == GPIO_INT_2_A){
-		putString("button 3 pressed!\n\r",19);
+		//putString("button 3 pressed!\n\r",19);
 		gpioIsrHandler(3);
 	}
 
 	if(irq_number == GPIO_INT_2_B){
-		putString("button 4 pressed!\n\r",19);
+		//putString("button 4 pressed!\n\r",19);
 		gpioIsrHandler(4);
 	}
     
@@ -179,45 +206,48 @@ void ISR_Handler(void){
 
 int main(void){
 	pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
-	
+	score = 0;
+	countRand = 0;
+	running = 1;
+	pos = 0;
 	/* Hardware setup */
 	gpioSetup();
 	timerSetup();
 	butConfig();
 	ledConfig();
 
-	internBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
-	internBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
+	internBlink(SOC_GPIO_1_REGS,ledPins,4,125);
+	internBlink(SOC_GPIO_1_REGS,ledPins,4,125);
 	countRand = SEED << 21;
 	
 	gameStartPrint();
 	
-	while(running){
-		actualPositionMole = randNumGen();
-		setLedsOFF(SOC_GPIO_1_REGS,ledPins,4);
-		switch (actualPositionMole)
-		{
+	while(true){
+
+		if (actualPositionMole != roleStop){
+			actualPositionMole = vetSeq[pos];
+			setLedsOFF(SOC_GPIO_1_REGS,ledPins,4);
+		}
+		switch (actualPositionMole){
 			case role1:
-				ledON(SOC_GPIO_1_REGS,ledPins[0]);
+				pinON(SOC_GPIO_1_REGS,ledPins[0]);
 				break;
 			
 			case role2:
-				ledON(SOC_GPIO_1_REGS,ledPins[1]);
+				pinON(SOC_GPIO_1_REGS,ledPins[1]);
 				break;
 			
 			case role3:
-				ledON(SOC_GPIO_1_REGS,ledPins[2]);
+				pinON(SOC_GPIO_1_REGS,ledPins[2]);
 				break;
 			
 			case role4:
-				ledON(SOC_GPIO_1_REGS,ledPins[3]);
-				break;
-			
-			default:
+				pinON(SOC_GPIO_1_REGS,ledPins[3]);
 				break;
 		}
 		delay(TIME);
-		countRand += 19;
+		pos = (pos+1)%63;
+		
 	}
 
 	return(0);
