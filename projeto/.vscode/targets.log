@@ -1,242 +1,288 @@
-make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 4.3
-# Built for x86_64-pc-linux-gnu
+# Built for Windows32
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Wed Jul 13 14:01:51 2022
+# Make data base, printed on Wed Jul 13 20:55:05 2022
 
 # Variables
 
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
+SYSTEMDRIVE = C:
+# environment
+JAVA_HOME = C:\Program Files\Java\jdk-17.0.2
 # makefile (from 'makefile', line 7)
 OBJ = obj/
-# environment
-GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # makefile (from 'makefile', line 6)
 SRC = src/
 # environment
-GNOME_SHELL_SESSION_MODE = pop
+USERPROFILE = C:\Users\juand
 # environment
-SSH_AGENT_LAUNCHER = gnome-keyring
+TMPDIR = C:\Users\juand\AppData\Local\Temp
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-dd241b05-5e77-407f-824a-a21d4eb625ee.sock
+LOCALAPPDATA = C:\Users\juand\AppData\Local
+# environ 
+ment
+WSLENV = WT_SESSION::WT_PROFILE_ID
 # environment
-VSCODE_CWD = /home/juanpimentel/Documentos/Github/Embarcados/projeto
+VSCODE_CWD = D:\Github\Embarcados
 # environment
-WINDOWPATH = 2
+MINGW_PREFIX = C:/Program Files/Git/mingw64
+# environment
+CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
+# environment
+SYSTEMROOT = C:\WINDOWS
+# environment
+PROCESSOR_LEVEL = 6
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 # makefile (from 'makefile', line 5)
 IPATH = -Iinc/
 # default
-MAKE_COMMAND := make
-# environment
-QT_ACCESSIBILITY = 1
+MAKE_COMMAND := make.exe
 # automatic
-@D = $(patsubst %/,%,$(dir $@))
+@D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
+# environment
+ACLOCAL_PATH = C:\Program Files\Git\mingw64\share\aclocal;C:\Program Files\Git\usr\share\aclocal
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_11052_JFISUYRAZLPPDGIA
+# environment
+ORIGINAL_TEMP = C:/Users/juand/AppData/Local/Temp
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/juanpimentel/Documentos/Github/Embarcados/projeto
+PWD = D:/Github/Embarcados
 # automatic
-%D = $(patsubst %/,%,$(dir $%))
+%D = $(patsubst %/,%,$(patsubst %\,%,$(dir $%)))
 # environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
+HOSTNAME = Desktop-Juan
 # makefile (from 'makefile', line 1)
 CHAINPATH = 
 # environment
-XDG_DATA_DIRS = /usr/share/pop:/usr/share/gnome:/home/juanpimentel/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/
-# environment
-OLDPWD = /home/juanpimentel
+OLDPWD = D:/
 # automatic
-^D = $(patsubst %/,%,$(dir $^))
-# environment
-VSCODE_LOG_STACK = false
+^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/juanpimentel/.config/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
+VSCODE_CODE_CACHE_PATH = C:\Users\juand\AppData\Roaming\Code\CachedData\92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9
+# environment
+SSH_ASKPASS = C:/Program Files/Git/mingw64/libexec/git-core/git-gui--askpass
 # environment
 LANG = C
-# environment
-XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .LOADED := 
-# default
-.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.822
+TMP = C:\Users\juand\AppData\Local\Temp
+# default
+.INCLUDE_DIRS = .
 # makefile
 MAKEFLAGS = pqrR
-# makefile
-CURDIR := /home/juanpimentel/Documentos/Github/Embarcados/projeto
 # environment
-VSCODE_PIPE_LOGGING = true
+PKG_CONFIG_PATH = C:\Program Files\Git\mingw64\lib\pkgconfig;C:\Program Files\Git\mingw64\share\pkgconfig
+# environment
+ONEDRIVE = C:\Users\juand\OneDrive
+# environment
+INTELLIJ IDEA COMMUNITY EDITION = C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2\bin;
+# makefile
+CURDIR := d:/Github/Embarcados/projeto
+# environment
+MSYSTEM_CARCH = x86_64
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
-*D = $(patsubst %/,%,$(dir $*))
+*D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
+# environment
+PROGRAMFILES = C:\Program Files
 # environment
 MFLAGS = -pqrR
-# environment
-SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # default
 .SHELLFLAGS := -c
 # environment
-XDG_CONFIG_DIRS = /etc/xdg/xdg-pop:/etc/xdg
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
 # automatic
-+D = $(patsubst %/,%,$(dir $+))
-# environment
-P9K_SSH = 0
-# environment
-XDG_SESSION_DESKTOP = pop
++D = $(patsubst %/,%,$(patsubst %\,%,$(dir $+)))
 # makefile (from 'makefile', line 1)
 MAKEFILE_LIST := makefile
 # automatic
 @F = $(notdir $@)
-# environment
-ZSH = /home/juanpimentel/.oh-my-zsh
 # makefile (from 'makefile', line 2)
 CHAIN = $(CHAINPATH)arm-none-eabi
 # environment
-VSCODE_VERBOSE_LOGGING = true
-# environment
-VSCODE_PID = 48422
-# environment
-XDG_SESSION_TYPE = x11
+VSCODE_PID = 11052
 # automatic
-?D = $(patsubst %/,%,$(dir $?))
+?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # environment
-SESSION_MANAGER = local/juan-pop-os:@/tmp/.ICE-unix/1482,unix/juan-pop-os:/tmp/.ICE-unix/1482
+MINGW_CHOST = x86_64-w64-mingw32
+# environment
+WT_PROFILE_ID = {2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}
 # automatic
 *F = $(notdir $*)
 # environment
-CHROME_DESKTOP = code-url-handler.desktop
-# environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+MANPATH = C:\Program Files\Git\mingw64\local\man;C:\Program Files\Git\mingw64\share\man;C:\Program Files\Git\usr\local\man;C:\Program Files\Git\usr\share\man;C:\Program Files\Git\usr\man;C:\Program Files\Git\share\man
 # automatic
-<D = $(patsubst %/,%,$(dir $<))
+<D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
 # environment
-P9K_TTY = old
+VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_languagePackId":"586ada59ea240d9b175b3ea817e73e56.pt-br","_translationsConfigFile":"C:\\Users\\juand\\AppData\\Roaming\\Code\\clp\\586ada59ea240d9b175b3ea817e73e56.pt-br\\tcf.json","_cacheRoot":"C:\\Users\\juand\\AppData\\Roaming\\Code\\clp\\586ada59ea240d9b175b3ea817e73e56.pt-br","_resolvedLanguagePackCoreLocation":"C:\\Users\\juand\\AppData\\Roaming\\Code\\clp\\586ada59ea240d9b175b3ea817e73e56.pt-br\\92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9","_corruptedFile":"C:\\Users\\juand\\AppData\\Roaming\\Code\\clp\\586ada59ea240d9b175b3ea817e73e56.pt-br\\corrupted.info","_languagePackSupport":true}
 # environment
-VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_languagePackId":"195456cb6bc5e7dd989215cd334fb359.pt-br","_translationsConfigFile":"/home/juanpimentel/.config/Code/clp/195456cb6bc5e7dd989215cd334fb359.pt-br/tcf.json","_cacheRoot":"/home/juanpimentel/.config/Code/clp/195456cb6bc5e7dd989215cd334fb359.pt-br","_resolvedLanguagePackCoreLocation":"/home/juanpimentel/.config/Code/clp/195456cb6bc5e7dd989215cd334fb359.pt-br/30d9c6cd9483b2cc586687151bcbcd635f373630","_corruptedFile":"/home/juanpimentel/.config/Code/clp/195456cb6bc5e7dd989215cd334fb359.pt-br/corrupted.info","_languagePackSupport":true}
+INTELLIJ IDEA EDUCATIONAL EDITION = C:\Program Files\JetBrains\IntelliJ IDEA Educational Edition 2021.1.3\bin;
 # default
-MAKE_HOST := x86_64-pc-linux-gnu
+MAKE_HOST := Windows32
 # environment
-GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+PROGRAMDATA = C:\ProgramData
+# environment
+INFOPATH = C:\Program Files\Git\usr\local\info;C:\Program Files\Git\usr\share\info;C:\Program Files\Git\usr\info;C:\Program Files\Git\share\info
 # makefile
-SHELL = /bin/sh
+SHELL = C:/Program Files/Git/usr/bin/sh.exe
+# environment
+ORIGINAL_PATH = C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\juand\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Python310\Scripts;C:\Python310;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk-17.0.2\bin;C:\Program Files\Java\jdk-17.0.2\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\msys64\mingw32\bin;C:\msys64\mingw64\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\ZeroTier\One;C:\ProgramData\chocolatey\bin;D:\Arquivos de Programas\Nodejs;C:\Program Files\GitHub CLI;D:\compiladorArm\toolchain\gcc-arm-none-eabi-10.3-2021.10\bin;C:\Users\juand\AppData\Local\Programs\Python\Python39\Scripts;C:\Users\juand\AppData\Local\Programs\Python\Python39;C:\Users\juand\AppData\Local\Microsoft\WindowsApps;C:\Users\juand\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA Educational Edition 2021.1.3\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2\bin;C:\Users\juand\AppData\Local\GitHubDesktop\bin;C:\Users\juand\AppData\Roaming\npm
+# environment
+HOMEPATH = \Users\juand
 # default
 MAKECMDGOALS := all
 # environment
-XMODIFIERS = @im=ibus
+SHLVL = 2
 # environment
-SHLVL = 1
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/1e671492_7592_4d57_bc47_0556ec7acdb5
+COMSPEC = C:\WINDOWS\system32\cmd.exe
+# environment
+WINDIR = C:\WINDOWS
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/juanpimentel/lab/toolchain/gcc-arm-none-eabi-10.3-2021.10/bin
+PATH = C:\Users\juand\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\juand\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Python310\Scripts;C:\Python310;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk-17.0.2\bin;C:\Program Files\Java\jdk-17.0.2\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\msys64\mingw32\bin;C:\msys64\mingw64\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\ZeroTier\One;C:\ProgramData\chocolatey\bin;D:\Arquivos de Programas\Nodejs;C:\Program Files\GitHub CLI;D:\compiladorArm\toolchain\gcc-arm-none-eabi-10.3-2021.10\bin;C:\Users\juand\AppData\Local\Programs\Python\Python39\Scripts;C:\Users\juand\AppData\Local\Programs\Python\Python39;C:\Users\juand\AppData\Local\Microsoft\WindowsApps;C:\Users\juand\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA Educational Edition 2021.1.3\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2\bin;C:\Users\juand\AppData\Local\GitHubDesktop\bin;C:\Users\juand\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+# environment
+ZES_ENABLE_SYSMAN = 1
+# environment
+COMPUTERNAME = DESKTOP-JUAN
 # default
 MAKEFILES := 
 # automatic
 ^F = $(notdir $^)
+# environment
+MINGW_PACKAGE_PREFIX = mingw-w64-x86_64
+# environment
+PROMPT = $P$G
+# environment
+CHOCOLATEYLASTPATHUPDATE = 132834762597331226
 # makefile (from 'makefile', line 4)
 AFLAGS = -mfpu=neon
 # environment
-VSCODE_LOG_NATIVE = false
+WT_SESSION = a185086e-f659-40f1-80b0-ff618810d070
 # environment
-USERNAME = juanpimentel
+LOGONSERVER = \\DESKTOP-JUAN
+# environment
+USERNAME = juand
+# environment
+COMMONPROGRAMFILES = C:\Program Files\Common Files
 # automatic
 ?F = $(notdir $?)
 # environment
-GTK_IM_MODULE = ibus
+PROGRAMW6432 = C:\Program Files
 # environment
-XDG_CURRENT_DESKTOP = Unity
+MSYSTEM_CHOST = x86_64-w64-mingw32
 # environment
-LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
 # automatic
 +F = $(notdir $+)
 # environment
-LESS = -R
+CONFIG_SITE = C:/Program Files/Git/etc/config.site
 # environment
-DESKTOP_SESSION = pop
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = pop:GNOME
+USERDOMAIN = DESKTOP-JUAN
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
-LOGNAME = juanpimentel
+OS = Windows_NT
+# environment
+MSYSTEM_PREFIX = C:/Program Files/Git/mingw64
 # makefile
 .DEFAULT_GOAL := all
 # environment
-SYSTEMD_EXEC_PID = 1502
-# environment
-DISPLAY = :1
-# environment
-USER = juanpimentel
-# environment
-GTK_MODULES = gail:atk-bridge:appmenu-gtk-module
+DISPLAY = needs-to-be-defined
 # default
 MAKE_VERSION := 4.3
 # environment
-PAGER = less
+MSYS = enable_pcon
 # environment
-_ = /usr/bin/code
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# environment
+USERDOMAIN_ROAMINGPROFILE = DESKTOP-JUAN
+# environment
+NUMBER_OF_PROCESSORS = 4
+# environment
+PUBLIC = C:\Users\Public
+# environment
+_ = C:/Users/juand/AppData/Local/Programs/Microsoft VS Code/Code.exe
 # makefile (from 'makefile', line 8)
 BIN = bin/
 # environment
-XDG_RUNTIME_DIR = /run/user/1000
+APPDATA = C:\Users\juand\AppData\Roaming
 # makefile (from 'makefile', line 3)
 CFLAGS = -std=c99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8
 # environment
-GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+HOMEDRIVE = C:
 # environment
-COLORTERM = truecolor
-# environment
-XDG_SESSION_CLASS = user
+PROCESSOR_ARCHITECTURE = AMD64
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /home/juanpimentel
+MSYSTEM = MINGW64
 # environment
-QT_IM_MODULE = ibus
+HOME = C:\Users\juand
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+JDK_HOME = C:\Program Files\Java\jdk-17.0.2
+# environment
+EXEPATH = C:\Program Files\Git\bin
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-7467bfeb-1.68.1-main.sock
+TEMP = C:\Users\juand\AppData\Local\Temp
 # environment
 TERM = xterm-256color
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\1566e9752c9b86aa6e4a41b6b14e8de1-1.69.0-main-sock
 # default
 .RECIPEPREFIX := 
+# environment
+ORIGINAL_TMP = C:/Users/juand/AppData/Local/Temp
 # automatic
 <F = $(notdir $<)
+# environment
+PLINK_PROTOCOL = ssh
 # default
 SUFFIXES := 
 # environment
-_P9K_TTY = /dev/pts/0
+ALLUSERSPROFILE = C:\ProgramData
 # environment
 VSCODE_CLI = 1
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
-# environment
-VTE_VERSION = 6800
 # default
-.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync load
 # environment
-XDG_MENU_PREFIX = gnome-
+PROCESSOR_REVISION = 9e09
 # environment
-GDMSESSION = pop
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 # variable set hash-table stats:
-# Load=112/1024=11%, Rehash=0, Collisions=17/154=11%
+# Load=135/1024=13%, Rehash=0, Collisions=20/174=11%
 
 # Pattern-specific Variable Values
 
@@ -244,9 +290,9 @@ GDMSESSION = pop
 
 # Directories
 
-# . (device 2051, inode 5769436): 12 files, no impossibilities.
+# . (key d:/Github/Embarcados/projeto, mtime 1657756041): 11 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -254,10 +300,11 @@ GDMSESSION = pop
 
 # Files
 
+ 
 # Not a target:
 src/start.s:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 22:16:38.378243
+#  Last modified 2022-07-13 20:47:21
 #  File has been updated.
 #  Successfully updated.
 
@@ -282,8 +329,8 @@ auxiliarFunctions.o: src/auxiliarFunctions.c
 
 dump:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
  
+#  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 38):
 	$(CHAIN)-objdump -D $(OBJ)main.elf
@@ -381,7 +428,7 @@ main.o: src/main.c
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-30 13:43:59.23982
+#  Last modified 2022-07-13 20:47:21
 #  File has been updated.
 #  Successfully updated.
 
@@ -399,12 +446,12 @@ makefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 29 / storage = 259 B / avg = 8 B
-# current buf: size = 8162 B / used = 259 B / count = 29 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 26 / storage = 223 B / avg = 8 B
+# current buf: size = 8162 B / used = 223 B / count = 26 / avg = 8 B
 
-# strcache performance: lookups = 49 / hit rate = 40%
+# strcache performance: lookups = 46 / hit rate = 43%
 # hash-table stats:
-# Load=29/8192=0%, Rehash=0, Collisions=0/49=0%
-# Finished Make data base on Wed Jul 13 14:01:51 2022
+# Load=26/8192=0%, Rehash=0, Collisions=0/46=0%
+# Finished Make data base on Wed Jul 13 20:55:05 2022
 
  

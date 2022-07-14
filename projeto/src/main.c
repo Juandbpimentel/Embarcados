@@ -2,12 +2,8 @@
 
 #define TIME timeVar
 
-int timeVar = 1000; 
-
-bool flag_btn_1 = false;
-bool flag_btn_2 = false;
-bool flag_btn_3 = false;
-bool flag_btn_4 = false;
+int timeVar = 1000;
+int score =   0;
 
 static molePosition actualPositionMole = role1;
 
@@ -68,34 +64,143 @@ void ledConfig ( ){
 	HWREG(SOC_CONTROL_REGS + CONF_GPMC_AD3) |= GPIO_FUNC;
 	HWREG(SOC_CONTROL_REGS + CONF_GPMC_AD6) |= GPIO_FUNC;
 	HWREG(SOC_CONTROL_REGS + CONF_GPMC_AD7) |= GPIO_FUNC;
+	HWREG(SOC_CONTROL_REGS + CONF_GPMC_AD8) |= GPIO_FUNC;
+
 
 	/* clear pins 2, 3, 6 and 7 for output */
-	HWREG(SOC_GPIO_1_REGS + GPIO_OE) &= ~(1<<2) & ~(1<<3) & ~(1<<6) & ~(1<<7);
+	HWREG(SOC_GPIO_1_REGS + GPIO_OE) &= ~(1<<2) & ~(1<<3) & ~(1<<6) & ~(1<<7) & ~(1<<8);
 	/* clear bit field that will be used */
-	HWREG(SOC_GPIO_1_REGS + GPIO_DATAOUT) &= ~(1<<2) & ~(1<<3) & ~(1<<6) & ~(1<<7);
+	HWREG(SOC_GPIO_1_REGS + GPIO_DATAOUT) &= ~(1<<2) & ~(1<<3) & ~(1<<6) & ~(1<<7) & ~(1<<8);
 
 }/* -----  end of function ledConfig  ----- */
-
 
 void gpioIsrHandler(int btn){
 
     /* Clear the status of the interrupt flags */
 	switch(btn){
 		case 1:
-			HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_0) |= 1<<16; 
-			flag_btn_1 = !(flag_btn_1) ;
+			if (actualPositionMole == role1){
+				score++;
+				if(score == 70){
+					pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
+					winStrike(SOC_GPIO_1_REGS,ledPins,4,PIN8,1000);
+					TIME = 1000;
+					score = 0;
+					HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_0) |= 1<<16;
+					return;
+				}
+
+				successStrike(SOC_GPIO_1_REGS,PIN8);
+				if (TIME>700){
+					TIME -= 30;
+				}else if(TIME>250){
+					TIME -= 15;
+				}else{
+					TIME -= 5;
+				}
+				
+			}else{
+				failStrike(SOC_GPIO_1_REGS,PIN8);
+				TIME = 1000;
+				score = 0;
+				HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_0) |= 1<<16;
+				return;
+			}
+			
+			HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_0) |= 1<<16;
 			break;
 		case 2:
-			HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_1) |= 1<<28; 
-			flag_btn_2 = !(flag_btn_2) ;
+			if (actualPositionMole == role2){
+				score++;
+				if(score == 70){
+					pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
+					winStrike(SOC_GPIO_1_REGS,ledPins,4,PIN8,1000);
+					TIME = 1000;
+					score = 0;
+					HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_1) |= 1<<28;
+					return;
+				}
+
+				successStrike(SOC_GPIO_1_REGS,PIN8);
+				if (TIME>700){
+					TIME -= 30;
+				}else if(TIME>250){
+					TIME -= 15;
+				}else{
+					TIME -= 5;
+				}
+				
+			}else{
+				failStrike(SOC_GPIO_1_REGS,PIN8);
+				TIME = 1000;
+				score = 0;
+				HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_1) |= 1<<28;
+				return;
+			}
+			
+			HWREG(SOC_GPIO_1_REGS+GPIO_IRQSTATUS_1) |= 1<<28;
 			break;
 		case 3:
-			HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_0) |= 1<<22; 
-			flag_btn_3 = !(flag_btn_3) ;
+			if (actualPositionMole == role3){
+				score++;
+				if(score == 70){
+					pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
+					winStrike(SOC_GPIO_1_REGS,ledPins,4,PIN8,1000);
+					TIME = 1000;
+					score = 0;
+					HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_0) |= 1<<22;
+					return;
+				}
+
+				successStrike(SOC_GPIO_1_REGS,PIN8);
+				if (TIME>700){
+					TIME -= 30;
+				}else if(TIME>250){
+					TIME -= 15;
+				}else{
+					TIME -= 5;
+				}
+				
+			}else{
+				failStrike(SOC_GPIO_1_REGS,PIN8);
+				TIME = 1000;
+				score = 0;
+				HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_0) |= 1<<22;
+				return;
+			}
+			
+			HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_0) |= 1<<22;
 			break;
 		case 4:
-			HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_1) |= 1<<24; 
-			flag_btn_4 = !(flag_btn_4) ;
+			if (actualPositionMole == role4){
+				score++;
+				if(score == 70){
+					pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
+					winStrike(SOC_GPIO_1_REGS,ledPins,4,PIN8,1000);
+					TIME = 1000;
+					score = 0;
+					HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_1) |= 1<<24;
+					return;
+				}
+
+				successStrike(SOC_GPIO_1_REGS,PIN8);
+				if (TIME>700){
+					TIME -= 30;
+				}else if(TIME>250){
+					TIME -= 15;
+				}else{
+					TIME -= 5;
+				}
+				
+			}else{
+				failStrike(SOC_GPIO_1_REGS,PIN8);
+				TIME = 1000;
+				score = 0;
+				HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_1) |= 1<<24;
+				return;
+			}
+			
+			HWREG(SOC_GPIO_2_REGS+GPIO_IRQSTATUS_1) |= 1<<24;
 			break;
 	}
 
@@ -138,56 +243,18 @@ int main(void){
 	pinNum ledPins[] = {PIN2,PIN3,PIN6,PIN7};
 	
 	/* Hardware setup */
-
 	gpioSetup();
-
 	timerSetup();
-
 	butConfig();
-
 	ledConfig();
-	//Randomic gerenation setup
-	////time_t t;
-	//srand((unsigned) time(&t));
-	//internBlink(pins,4,TIME);
-#if DELAY_USE_INTERRUPT 
-	putString("Timer Interrupt: ",17);
-#else
-	putString("Timer: ",7);
-#endif
+
+	internBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
+	internBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
 
 	while(true){
 		//actualPositionMole = (rand()%4)+1;
 		//putCh(actualPositionMole+'0');
 		//putString(" - Actual position\n\r",20);
-		if(flag_btn_2){
-			if (flag_btn_1)
-			{
-				if(TIME!= 25)
-				TIME = 25;
-				putString("superfast\n\r",11);
-				goOnGoOutBlink(SOC_GPIO_1_REGS, ledPins,4,TIME);
-			}else{
-				putString("fast\n\r",6);
-				if(TIME!= 75)
-				TIME = 50;
-				goOnGoOutBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
-			}
-
-		}else{
-			if (flag_btn_1)
-			{
-				putString("normal\n\r",8);
-				if(TIME!= 150)
-				TIME = 200;
-				goOnGoOutBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
-			}else{
-				putString("slow!\n\r",7);
-				if(TIME!= 250)
-					TIME = 250;
-				goOnGoOutBlink(SOC_GPIO_1_REGS,ledPins,4,TIME);
-			}
-		}
 	}
 
 	return(0);

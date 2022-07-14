@@ -31,14 +31,19 @@ extern "C" {
 #define GPIO_DEBOUNCENABLE									(0x00000150)
 
 /*                       Control module GPIO registers                */
+//buttons gpio1
 #define CONF_GPMC_BEN_1							            (0x00000878)
 #define CONF_GPMC_A0					    			    (0x00000840)
+//buttons gpio2
+#define CONF_LCD_VSYNC							            (0x000008E0)
+#define CONF_LCD_PCLK							            (0x000008E8)
+//buzzer gpio1
+#define CONF_GPMC_AD8								        (0x00000820) // EHRPWM2A
+//leds gpio1
 #define CONF_GPMC_AD2								        (0x00000808)
 #define CONF_GPMC_AD3								        (0x0000080C)
 #define CONF_GPMC_AD6								        (0x00000818)
 #define CONF_GPMC_AD7								        (0x0000081C)
-#define CONF_LCD_VSYNC							            (0x000008E0)
-#define CONF_LCD_PCLK							            (0x000008E8)
 
 /*                          Timer registers                           */
 #define CM_PER_TIMER7_CLKCTRL								(0x0000007C)

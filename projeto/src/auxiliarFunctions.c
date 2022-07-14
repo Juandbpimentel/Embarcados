@@ -306,3 +306,36 @@ void timerIrqHandler(void){
 	timerDisable();
 
 }
+
+void failStrike(unsigned int gpio,pinNum pin){
+    ledON(SOC_GPIO_1_REGS,pin);
+    delay(500);
+    ledOFF(SOC_GPIO_1_REGS,pin);
+    ledON(SOC_GPIO_1_REGS,pin);
+    delay(500);
+    ledOFF(SOC_GPIO_1_REGS,pin);
+    ledON(SOC_GPIO_1_REGS,pin);
+    delay(500);
+    ledOFF(SOC_GPIO_1_REGS,pin);
+}
+
+void successStrike(unsigned int gpio,pinNum pin){
+    ledON(SOC_GPIO_1_REGS,pin);
+    delay(100);
+    ledOFF(SOC_GPIO_1_REGS,pin);   
+}
+
+void winStrike(unsigned int gpio,pinNum pins[], int n, pinNum buzzer, unsigned int TIME){
+    ledON(gpio,buzzer);
+    allBlink(gpio,pins,n,TIME/4);
+    ledOFF(gpio,buzzer);
+    ledON(gpio,buzzer);
+    allBlink(gpio,pins,n,TIME/4);
+    ledOFF(gpio,buzzer);
+    ledON(gpio,buzzer);
+    allBlink(gpio,pins,n,TIME/4);
+    ledOFF(gpio,buzzer);
+    ledON(gpio,buzzer);
+    allBlink(gpio,pins,n,TIME/4);
+    ledOFF(gpio,buzzer);
+}
